@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\amind\OneDrive\Desktop\New folder</_PublishTargetUrl>
+    <History>True|2021-07-14T13:50:37.8400793Z;True|2021-07-14T13:02:35.6006836+04:30;True|2021-07-14T12:57:01.5871329+04:30;True|2021-07-14T12:44:11.6457509+04:30;True|2021-07-14T12:43:22.9126155+04:30;True|2021-07-14T12:30:02.3984731+04:30;True|2021-07-14T12:01:19.3033866+04:30;True|2021-07-14T11:56:08.3987287+04:30;True|2021-07-14T11:45:44.3032539+04:30;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="CurrencyDbConnectionString">
+      <Value>Server=DESKTOP-PPMJF85\SQL2019%3bDatabase=CurrencyDb%3bUser Id = sa%3bPassword = 123456</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="CurrencyShop.Data.CurrencyShopDb">
+      <Value>Server=DESKTOP-PPMJF85\SQL2019%3bDatabase=CurrencyDb%3bUser Id = sa%3bPassword = 123456</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,400 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CurrencyShop</name>
+    </assembly>
+    <members>
+        <member name="M:CurrencyShop.Controllers.AppAccountController.register(CurrencyShop.Models.PannelUser)">
+            <response code="400">this Email Already Exist</response>
+            <response code="201">create account successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAccountController.login(CurrencyShop.Models.PannelUser)">
+            <response code="200">Get Token successfully</response>
+            <response code="401">Invalid email or password</response>
+            <response code="404">the user dosent exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAccountController.changePassword(CurrencyShop.Models.ChangePasswordModel)">
+            <remarks>simple </remarks>
+            <response code="200">Password has been changed!</response>
+            <response code="401">Sorry cant change your password</response>
+            <response code="404">Invald password</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAccountController.userProfile">
+            <response code="200">profile has been changed!</response>
+            <response code="404">Invald password</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAdmobController.Get">
+            <response code="200">Get Admob Token</response>
+            <response code="404">Admob Token not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAdmobController.Put(System.Int32,System.String)">
+            <response code="200">Change Admob Token  successfully</response>
+            <response code="201">create Admob Token  successfully</response>
+            <response code="404">Admob Token not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAdmobController.Delete(System.Int32)">
+            <response code="200">delete successfully</response>
+            <response code="404">Entity not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAdsController.Get">
+            <response code="200">Get Ads</response>
+            <response code="400">No ads found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAdsController.Get(System.Int32)">
+            <response code="200">Get Ads by Id</response>
+            <response code="400">No ads found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppAdsController.Put(System.Int32,System.Byte[],System.String)">
+            <response code="200">Get Admob Token</response>
+            <response code="400">image does not uploded</response>
+            <response code="201">Ads change successfull </response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppBrandsController.brands(System.Collections.Generic.List{CurrencyShop.Models.Brand})">
+            <response code="200">Get brands successfull</response>
+            <response code="404">There is no brand</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppBrandsController.brands(System.Int32)">
+            <response code="200">Get brands successfull</response>
+            <response code="404">There is no brand</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppBrandsController.brands(System.Int32,System.String)">
+            <response code="200">Change brand successfull</response>
+            <response code="404">this brand dose not exist!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCategoryController.Post(System.Collections.Generic.List{CurrencyShop.Models.Category})">
+            <response code="200">Get category successfull</response>
+            <response code="404">There is no category</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCategoryController.Get">
+            <response code="200">Get category successfull</response>
+            <response code="404">There is no category</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCategoryController.Get(System.Int32)">
+            <response code="200">Get category successfull</response>
+            <response code="404">There is no category</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppChatsController.authUsers(CurrencyShop.Models.AuthenticateChatUser)">
+            <response code="200">Registerd</response>
+            <response code="202">user exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppChatsController.messge(CurrencyShop.Models.ChatRoom)">
+            <response code="200">Sent!</response>
+            <response code="400">send Message failed</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppChatsController.dcrementRepot(System.Int32)">
+            <response code="200">saved Change</response>
+            <response code="400">This message did not recive any reports</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppChatsController.incrementRepot(System.Int32)">
+            <response code="200">saved Change</response>
+            <response code="400">This message did not recive any reports</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppChatsController.report(System.Int32)">
+            <response code="200">saved Change</response>
+            <response code="404">This message not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.price(System.Collections.Generic.List{CurrencyShop.Models.Prices})">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.price(CurrencyShop.Models.Prices)">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.currency(System.Collections.Generic.List{CurrencyShop.Models.Currency})">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.Currency(CurrencyShop.Models.Currency)">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.currency">
+            <response code="200">Get List currency successfull</response>
+            <response code="202">Currency not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.price(System.String)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">prices history not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.price(System.String,System.Int32)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">prices history not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.maxPrices(System.String)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">max prices not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.minPrices(System.String)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">max prices not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.price(System.Int32,System.Int32)">
+            <response code="200">save change successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.currencyList">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.currency(System.Int32)">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.priceHistoryList">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.priceHistory(System.Int32)">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppCurrencyController.perMonth(System.Int32)">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppFilteringController.word(System.Collections.Generic.List{CurrencyShop.Models.Words})">
+            <response code="200">Words Added</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CurrencyShop.Controllers.AppObjectController.objects(System.Collections.Generic.List{CurrencyShop.Models.Objects})" -->
+        <!-- Badly formed XML comment ignored for member "M:CurrencyShop.Controllers.AppObjectController.oneObject(CurrencyShop.Models.Objects)" -->
+        <member name="M:CurrencyShop.Controllers.AppObjectController.mobile">
+            <response code="200">get mobile successfully</response>
+            <response code="404">any mobile doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.mobile(System.Int32)">
+            <response code="200">get mobile successfully</response>
+            <response code="404">any mobile doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.vehicle">
+            <response code="200">get vehicle successfully</response>
+            <response code="404">any vehicle doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.vehicle(System.Int32)">
+            <response code="200">get vehicle successfully</response>
+            <response code="404">any vehicle doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.objects">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.Filter(System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceLastFilter(System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceFilter(System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.FilterCategory(System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceLastCategoryFilter(System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryFilter(System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceLastCategoryBrandFilter(System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryBrandFilter(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.search(System.String)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.changeObject(System.Collections.Generic.List{CurrencyShop.Models.Objects})">
+            <response code="200">saved change</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.objects(System.Int32)">
+            <response code="200">saved change</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAccountController.register(CurrencyShop.Models.PannelUser)">
+            <response code="400">this Email Already Exist</response>
+            <response code="201">create account successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAccountController.login(CurrencyShop.Models.PannelUser)">
+            <response code="200">Get Token successfully</response>
+            <response code="401">Invalid email or password</response>
+            <response code="404">the user dosent exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAccountController.changePassword(CurrencyShop.Models.ChangePasswordModel)">
+            <remarks>simple </remarks>
+            <response code="200">Password has been changed!</response>
+            <response code="401">Sorry cant change your password</response>
+            <response code="404">Invald password</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAccountController.userProfile">
+            <response code="200">profile has been changed!</response>
+            <response code="404">Invald password</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAdmobController.Get">
+            <response code="200">Get Admob Token</response>
+            <response code="404">Admob Token not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAdmobController.Put(System.Int32,System.String)">
+            <response code="200">Change Admob Token  successfully</response>
+            <response code="201">create Admob Token  successfully</response>
+            <response code="404">Admob Token not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAdmobController.Delete(System.Int32)">
+            <response code="200">delete successfully</response>
+            <response code="404">Entity not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAdsController.Get">
+            <response code="200">Get Ads</response>
+            <response code="400">No ads found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAdsController.Get(System.Int32)">
+            <response code="200">Get Ads by Id</response>
+            <response code="400">No ads found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebAdsController.Put(System.Int32,System.Byte[],System.String)">
+            <response code="200">Get Admob Token</response>
+            <response code="400">image does not uploded</response>
+            <response code="201">Ads change successfull </response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebBrandsController.brands(System.Collections.Generic.List{CurrencyShop.Models.Brand})">
+            <response code="200">Get brands successfull</response>
+            <response code="404">There is no brand</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebBrandsController.brands(System.Int32)">
+            <response code="200">Get brands successfull</response>
+            <response code="404">There is no brand</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebBrandsController.brands(System.Int32,System.String)">
+            <response code="200">Change brand successfull</response>
+            <response code="404">this brand dose not exist!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.Post(System.Collections.Generic.List{CurrencyShop.Models.Category})">
+            <response code="200">Get category successfull</response>
+            <response code="404">There is no category</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.Get">
+            <response code="200">Get category successfull</response>
+            <response code="404">There is no category</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.Get(System.Int32)">
+            <response code="200">Get category successfull</response>
+            <response code="404">There is no category</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebChatsController.authUsers(CurrencyShop.Models.AuthenticateChatUser)">
+            <response code="200">Registerd</response>
+            <response code="202">user exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebChatsController.messge(CurrencyShop.Models.ChatRoom)">
+            <response code="200">Sent!</response>
+            <response code="400">send Message failed</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebChatsController.dcrementRepot(System.Int32)">
+            <response code="200">saved Change</response>
+            <response code="400">This message did not recive any reports</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebChatsController.incrementRepot(System.Int32)">
+            <response code="200">saved Change</response>
+            <response code="400">This message did not recive any reports</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebChatsController.report(System.Int32)">
+            <response code="200">saved Change</response>
+            <response code="404">This message not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.price(System.Collections.Generic.List{CurrencyShop.Models.Prices})">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.price(CurrencyShop.Models.Prices)">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.currency(System.Collections.Generic.List{CurrencyShop.Models.Currency})">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.Currency(CurrencyShop.Models.Currency)">
+            <response code="200">added data successfuly!</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.currency">
+            <response code="200">Get List currency successfull</response>
+            <response code="202">Currency not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.price(System.String)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">prices history not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.price(System.String,System.Int32)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">prices history not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.maxPrices(System.String)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">max prices not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.minPrices(System.String)">
+            <response code="200">Get List of Price successfull</response>
+            <response code="202">max prices not found</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.price(System.Int32,System.Int32)">
+            <response code="200">save change successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.currencyList">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.currency(System.Int32)">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.priceHistoryList">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.priceHistory(System.Int32)">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.perMonth(System.Int32)">
+            <response code="200">delete data successfull</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebFilteringController.word(System.Collections.Generic.List{CurrencyShop.Models.Words})">
+            <response code="200">Words Added</response>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CurrencyShop.Controllers.WebObjectController.objects(System.Collections.Generic.List{CurrencyShop.Models.Objects})" -->
+        <!-- Badly formed XML comment ignored for member "M:CurrencyShop.Controllers.WebObjectController.oneObject(CurrencyShop.Models.Objects)" -->
+        <member name="M:CurrencyShop.Controllers.WebObjectController.mobile">
+            <response code="200">get mobile successfully</response>
+            <response code="404">any mobile doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.mobile(System.Int32)">
+            <response code="200">get mobile successfully</response>
+            <response code="404">any mobile doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.vehicle">
+            <response code="200">get vehicle successfully</response>
+            <response code="404">any vehicle doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.vehicle(System.Int32)">
+            <response code="200">get vehicle successfully</response>
+            <response code="404">any vehicle doesnt exist</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.objects">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.Filter(System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceLastFilter(System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceFilter(System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.FilterCategory(System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceLastCategoryFilter(System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryFilter(System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceLastCategoryBrandFilter(System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryBrandFilter(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.search(System.String)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.changeObject(System.Collections.Generic.List{CurrencyShop.Models.Objects})">
+            <response code="200">saved change</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.objects(System.Int32)">
+            <response code="200">saved change</response>
+        </member>
+    </members>
+</doc>
