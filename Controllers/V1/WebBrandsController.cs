@@ -101,7 +101,7 @@ namespace CurrencyShop.Controllers
         }
         /// <response code="200">Get brands successfull</response>
         /// <response code="404">There is no brand</response>
-        [HttpGet]
+        [HttpGet("{categoryId}")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Brand>))]
 
