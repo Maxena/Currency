@@ -212,7 +212,7 @@
             <response code="200">get mobile successfully</response>
             <response code="404">any mobile doesnt exist</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.AppObjectController.mobile(System.Int32)">
+        <member name="M:CurrencyShop.Controllers.AppObjectController.mobile(System.String)">
             <response code="200">get mobile successfully</response>
             <response code="404">any mobile doesnt exist</response>
         </member>
@@ -220,7 +220,7 @@
             <response code="200">get vehicle successfully</response>
             <response code="404">any vehicle doesnt exist</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.AppObjectController.vehicle(System.Int32)">
+        <member name="M:CurrencyShop.Controllers.AppObjectController.vehicle(System.String)">
             <response code="200">get vehicle successfully</response>
             <response code="404">any vehicle doesnt exist</response>
         </member>
@@ -245,10 +245,10 @@
         <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryFilter(System.Int32,System.Int32,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.AppObjectController.priceLastCategoryBrandFilter(System.Int32,System.Int32,System.Int32)">
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceLastCategoryBrandFilter(System.Int32,System.String,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryBrandFilter(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryBrandFilter(System.Int32,System.String,System.Int32,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
         <member name="M:CurrencyShop.Controllers.AppObjectController.search(System.String)">
@@ -468,7 +468,7 @@
             <response code="200">get mobile successfully</response>
             <response code="404">any mobile doesnt exist</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebObjectController.mobile(System.Int32)">
+        <member name="M:CurrencyShop.Controllers.WebObjectController.mobile(System.String)">
             <response code="200">get mobile successfully</response>
             <response code="404">any mobile doesnt exist</response>
         </member>
@@ -476,7 +476,7 @@
             <response code="200">get vehicle successfully</response>
             <response code="404">any vehicle doesnt exist</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebObjectController.vehicle(System.Int32)">
+        <member name="M:CurrencyShop.Controllers.WebObjectController.vehicle(System.String)">
             <response code="200">get vehicle successfully</response>
             <response code="404">any vehicle doesnt exist</response>
         </member>
@@ -501,10 +501,10 @@
         <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryFilter(System.Int32,System.Int32,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebObjectController.priceLastCategoryBrandFilter(System.Int32,System.Int32,System.Int32)">
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceLastCategoryBrandFilter(System.Int32,System.String,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryBrandFilter(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryBrandFilter(System.Int32,System.String,System.Int32,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
         <member name="M:CurrencyShop.Controllers.WebObjectController.search(System.String)">

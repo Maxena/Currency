@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CurrencyShop.Migrations
 {
-    public partial class initalcreate : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -184,7 +184,7 @@ namespace CurrencyShop.Migrations
                     Price = table.Column<double>(nullable: false),
                     DatePosted = table.Column<DateTime>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    BrandId = table.Column<int>(nullable: false)
+                    BrandName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

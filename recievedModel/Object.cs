@@ -19,7 +19,7 @@ namespace CurrencyShop.Models
         public double Price { get; set; }
         public DateTime DatePosted { get; set; }
         public int CategoryId { get; set; }
-        public int BrandId { get; set; }
+        public string BrandName { get; set; }
 
         }
 }

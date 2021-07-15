@@ -163,6 +163,7 @@ namespace CurrencyShop.Controllers
                          select new RCurrency()
                          {
                              Id = c.Id,
+
                              ImgInternetUrl = c.ImgInternetUrl,
                              ImgUrl = c.ImgUrl,
                              LastPrice = c.LastPrice,
@@ -192,6 +193,7 @@ namespace CurrencyShop.Controllers
                          where p.Name == name
                          select new RPrices()
                          {
+                             Name = p.Name,
                              Id = p.Id,
                              Price = p.Price,
                              Updated = p.Updated,
@@ -218,6 +220,7 @@ namespace CurrencyShop.Controllers
                          where c.Type == type
                          select new RCurrency()
                          {
+                             Name = c.Name,
                              Id = c.Id,
                              LastPrice = c.LastPrice,
                              LastUpdated = c.LastUpdated,
@@ -247,6 +250,7 @@ namespace CurrencyShop.Controllers
                          where (DateTime.Now - p.Updated).TotalDays <= duration
                          select new RPrices()
                          {
+                             Name = p.Name,
                              Id = p.Id,
                              Price = p.Price,
                              Updated = p.Updated,

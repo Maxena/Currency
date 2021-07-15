@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CurrencyShop.Migrations
 {
     [DbContext(typeof(CurrencyShopDb))]
-    [Migration("20210714082510_initalcreate")]
-    partial class initalcreate
+    [Migration("20210715101428_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -202,8 +202,8 @@ namespace CurrencyShop.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<string>("BrandName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");

@@ -1,4 +1,4 @@
-using AspNetCoreRateLimit;
+    using AspNetCoreRateLimit;
 using CurrencyShop.Data;
 using CurrencyShop.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -67,7 +67,12 @@ namespace CurrencyShop
             services.AddControllers();
             services.AddInMemoryRateLimiting();
 
-          
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
             services.AddSwaggerGen(c =>
             {
@@ -134,7 +139,7 @@ namespace CurrencyShop
             app.UseHttpsRedirection();
             app.UseIpRateLimiting();
 
-
+            app.UseCors("MyPolicy");
             app.UseSwagger(c =>
             {
                 c.SerializeAsV2 = true;

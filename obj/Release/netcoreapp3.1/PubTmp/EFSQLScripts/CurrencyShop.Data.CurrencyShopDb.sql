@@ -9,7 +9,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [AdMob] (
         [Id] int NOT NULL IDENTITY,
@@ -20,7 +20,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [Ads] (
         [Id] int NOT NULL IDENTITY,
@@ -32,7 +32,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [authenticateChatUsers] (
         [Id] int NOT NULL IDENTITY,
@@ -44,7 +44,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [Categories] (
         [Id] int NOT NULL IDENTITY,
@@ -57,7 +57,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [Currency] (
         [Id] int NOT NULL IDENTITY,
@@ -73,7 +73,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [PannelUsers] (
         [Id] int NOT NULL IDENTITY,
@@ -86,7 +86,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [Prices] (
         [Id] int NOT NULL IDENTITY,
@@ -99,7 +99,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [words] (
         [Id] int NOT NULL IDENTITY,
@@ -110,7 +110,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [chatRooms] (
         [Id] int NOT NULL IDENTITY,
@@ -130,7 +130,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [Brands] (
         [Id] int NOT NULL IDENTITY,
@@ -145,7 +145,7 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE TABLE [Objects] (
         [Id] int NOT NULL IDENTITY,
@@ -154,7 +154,7 @@ BEGIN
         [Price] float NOT NULL,
         [DatePosted] datetime2 NOT NULL,
         [CategoryId] int NOT NULL,
-        [BrandId] int NOT NULL,
+        [BrandName] nvarchar(max) NULL,
         CONSTRAINT [PK_Objects] PRIMARY KEY ([Id]),
         CONSTRAINT [FK_Objects_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([Id]) ON DELETE CASCADE
     );
@@ -162,31 +162,31 @@ END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE INDEX [IX_Brands_categoryId] ON [Brands] ([categoryId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE INDEX [IX_chatRooms_AuthenticateChatUserId] ON [chatRooms] ([AuthenticateChatUserId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     CREATE INDEX [IX_Objects_CategoryId] ON [Objects] ([CategoryId]);
 END;
 
 GO
 
-IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210714082510_initalcreate')
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20210715101428_initialCreate')
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20210714082510_initalcreate', N'3.1.16');
+    VALUES (N'20210715101428_initialCreate', N'3.1.16');
 END;
 
 GO

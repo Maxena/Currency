@@ -215,6 +215,7 @@ namespace CurrencyShop.Controllers
                          select new RCurrency()
                          {
                              Id = c.Id,
+                             Name=c.Name,
                              LastPrice = c.LastPrice,
                              LastUpdated = c.LastUpdated,
                              Type = c.Type,
@@ -243,6 +244,7 @@ namespace CurrencyShop.Controllers
                          where (DateTime.Now - p.Updated).TotalDays<=duration
                          select new RPrices()
                          {
+                             Name = p.Name,
                              Id = p.Id,
                              Price = p.Price,
                              Updated = p.Updated,

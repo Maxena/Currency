@@ -62,7 +62,7 @@ namespace CurrencyShop.Controllers
                           {
 
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -75,17 +75,18 @@ namespace CurrencyShop.Controllers
         }
         /// <response code="200">get mobile successfully</response>
         /// <response code="404">any mobile doesnt exist</response>
-        [HttpGet("{brandId}")]
+        [HttpGet("{brandName}")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
-        public IActionResult mobile(int brandId)
+        public IActionResult mobile(string brandName)
         {
             var mobiles = from m in currencyShopDb.Objects
-                          where m.BrandId == brandId
+                          where m.CategoryId == 1
+                          where m.BrandName == brandName
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -110,7 +111,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = v.Id,
-                              BrandId = v.BrandId,
+                              BrandName = v.BrandName,
                               Name = v.Name,
                               Price = v.Price,
                               ProduceYear = v.ProduceYear,
@@ -125,18 +126,19 @@ namespace CurrencyShop.Controllers
 
         /// <response code="200">get vehicle successfully</response>
         /// <response code="404">any vehicle doesnt exist</response>
-        [HttpGet("{brandId}")]
+        [HttpGet("{brandName}")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
-        public IActionResult vehicle(int brandId)
+        public IActionResult vehicle(string brandName)
         {
 
             var vehicle = from v in currencyShopDb.Objects
-                          where v.BrandId == brandId
+                          where v.CategoryId == 1
+                          where v.BrandName == brandName
                           select new RObjects()
                           {
                               Id = v.Id,
-                              BrandId = v.BrandId,
+                              BrandName = v.BrandName,
                               Name = v.Name,
                               Price = v.Price,
                               ProduceYear = v.ProduceYear,
@@ -170,7 +172,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -195,7 +197,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -219,7 +221,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -244,7 +246,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -271,7 +273,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -296,7 +298,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -314,16 +316,16 @@ namespace CurrencyShop.Controllers
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
 
-        public IActionResult priceLastCategoryBrandFilter(int categoryId, int brandId, int lastPrice)
+        public IActionResult priceLastCategoryBrandFilter(int categoryId, string brandName, int lastPrice)
         {
             var objects = from m in currencyShopDb.Objects
                           where m.CategoryId == categoryId
-                          where m.BrandId == brandId
+                          where m.BrandName == brandName
                           where m.Price <= lastPrice
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = brandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -341,16 +343,16 @@ namespace CurrencyShop.Controllers
         [ActionName("object")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
-        public IActionResult priceCategoryBrandFilter(int categoryId, int brandId, int startPrice, int lastPrice)
+        public IActionResult priceCategoryBrandFilter(int categoryId, string brandName, int startPrice, int lastPrice)
         {
             var objects = from m in currencyShopDb.Objects
                           where m.CategoryId == categoryId
-                          where m.BrandId == brandId
+                          where m.BrandName == brandName
                           where m.Price >= startPrice && m.Price <= startPrice
                           select new RObjects()
                           {
                               Id = m.Id,
-                              BrandId = m.BrandId,
+                              BrandName = brandName,
                               Name = m.Name,
                               Price = m.Price,
                               ProduceYear = m.ProduceYear,
@@ -364,7 +366,7 @@ namespace CurrencyShop.Controllers
         }
 
         /// <response code="200">get object successfully</response>
-        [HttpGet("[action]/{searchTag}")]
+        [HttpGet("[action]/{search}")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
         public IActionResult search(string search)
@@ -374,7 +376,7 @@ namespace CurrencyShop.Controllers
                           select new RObjects()
                           {
                               Id = v.Id,
-                              BrandId = v.BrandId,
+                              BrandName = v.BrandName,
                               Name = v.Name,
                               Price = v.Price,
                               ProduceYear = v.ProduceYear,
@@ -400,7 +402,7 @@ namespace CurrencyShop.Controllers
                 var entity = currencyShopDb.Objects.Find(obj.Id);
                 entity.Price = obj.Price;
                 entity.Name = obj.Name;
-                entity.BrandId = obj.BrandId;
+                entity.BrandName = obj.BrandName;
                 obj.CategoryId = obj.CategoryId;
                 currencyShopDb.SaveChanges();
 
@@ -416,7 +418,7 @@ namespace CurrencyShop.Controllers
             var entity = currencyShopDb.Objects.Find(obj.Id);
             entity.Price = obj.Price;
             entity.Name = obj.Name;
-            entity.BrandId = obj.BrandId;
+            entity.BrandName = obj.BrandName;
             obj.CategoryId = obj.CategoryId;
             currencyShopDb.SaveChanges();
 
