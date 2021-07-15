@@ -44,10 +44,10 @@ namespace CurrencyShop.Controllers
         /// <response code="404">There is no brand</response>
         /// <response code="401">image does not uploded</response>
         
-        [HttpPost]
+        [HttpPost("{id}")]
         [Authorize]
         [MapToApiVersion("1")]
-        public IActionResult imgUrl([FromQueryAttribute] int id,byte[]imageArray)
+        public IActionResult imgUrl(int id,[FromBody] byte[]imageArray)
         {
 
 
@@ -80,10 +80,10 @@ namespace CurrencyShop.Controllers
         /// <response code="200">Image Uploaded</response>
         /// <response code="404">There is no Image</response>
 
-        [HttpPost("internet")]
+        [HttpPost("internet/{id}")]
         [Authorize]
         [MapToApiVersion("1")]
-        public IActionResult imgUrl([FromQueryAttribute] int id, string url)
+        public IActionResult imgUrl(int id, [FromBody]  string url)
         {
             var entity = currencyShopDb.Brands.Find(id);
             if (entity != null)
