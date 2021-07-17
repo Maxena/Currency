@@ -98,14 +98,14 @@ namespace CurrencyShop.Controllers
         [HttpPost("{id}")]
         [Authorize]
         [MapToApiVersion("1")]
-        public IActionResult imgUrl(int id, [FromBody] byte[] imageArray)
+        public IActionResult imgUrl(int id, [FromBody] imageModel image)
         {
 
 
-            var stream = new MemoryStream(imageArray);
+            var stream = new MemoryStream(image.image);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot/AdsImage";
+            var file = $"{guid}.svg";
+            var folder = "wwwroot/currency";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
             var response = FileHelper.UploadPhoto(stream, folder, file);
@@ -163,7 +163,6 @@ namespace CurrencyShop.Controllers
                          select new RCurrency()
                          {
                              Id = c.Id,
-
                              ImgInternetUrl = c.ImgInternetUrl,
                              ImgUrl = c.ImgUrl,
                              LastPrice = c.LastPrice,
@@ -193,7 +192,6 @@ namespace CurrencyShop.Controllers
                          where p.Name == name
                          select new RPrices()
                          {
-                             Name = p.Name,
                              Id = p.Id,
                              Price = p.Price,
                              Updated = p.Updated,
@@ -220,8 +218,8 @@ namespace CurrencyShop.Controllers
                          where c.Type == type
                          select new RCurrency()
                          {
-                             Name = c.Name,
                              Id = c.Id,
+                             Name = c.Name,
                              LastPrice = c.LastPrice,
                              LastUpdated = c.LastUpdated,
                              Type = c.Type,
@@ -411,13 +409,13 @@ namespace CurrencyShop.Controllers
         [ActionName("imgUrl")]
 
         [Authorize]
-        public IActionResult imageUrl(int id, [FromBody] byte[] imageUrl)
+        public IActionResult imageUrl(int id, [FromBody] imageModel image)
         {
 
-            var stream = new MemoryStream(imageUrl);
+            var stream = new MemoryStream(image.image);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot/AdsImage";
+            var file = $"{guid}.svg";
+            var folder = "wwwroot/currency";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
             var response = FileHelper.UploadPhoto(stream, folder, file);

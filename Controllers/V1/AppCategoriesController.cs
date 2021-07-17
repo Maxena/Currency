@@ -30,8 +30,9 @@ namespace CurrencyShop.Controllers
         [HttpPost]
         [Authorize]
         [MapToApiVersion("1")]
-     
-        public IActionResult Post(List<Category>categories) {
+
+        public IActionResult Post(List<Category> categories)
+        {
             if (categories.Count > 0)
             {
                 currencyShopDb.Categories.AddRange(categories.Distinct().ToList());
@@ -47,14 +48,14 @@ namespace CurrencyShop.Controllers
         [HttpPost("{id}")]
         [Authorize]
         [MapToApiVersion("1")]
-        public IActionResult imgUrl(int id, [FromBody]  byte[] imageArray)
+        public IActionResult imgUrl(int id, [FromBody] byte[] imageArray)
         {
 
 
             var stream = new MemoryStream(imageArray);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot/AdsImage";
+            var file = $"{guid}.svg";
+            var folder = "wwwroot/category";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
             var response = FileHelper.UploadPhoto(stream, folder, file);
@@ -99,10 +100,10 @@ namespace CurrencyShop.Controllers
         }
 
 
-            /// <response code="200">Get category successfull</response>
-            /// <response code="404">There is no category</response>
-            // GET: api/<ValuesController>
-            [HttpGet]
+        /// <response code="200">Get category successfull</response>
+        /// <response code="404">There is no category</response>
+        // GET: api/<ValuesController>
+        [HttpGet]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Category>))]
         public IActionResult Get()
@@ -111,26 +112,30 @@ namespace CurrencyShop.Controllers
                          select new RCategory()
                          {
                              Id = c.Id,
-                             Brands =currencyShopDb.Brands.Where(b=>c.Id==b.categoryId).Select(b=>new RBrand() { Id = b.Id,categoryId=b.categoryId,
-                            Name=b.Name
-                            }).ToList(),
-                            Type=c.Type,
+                             Brands = currencyShopDb.Brands.Where(b => c.Id == b.categoryId).Select(b => new RBrand()
+                             {
+                                 Id = b.Id,
+                                 categoryId = b.categoryId,
+                                 Name = b.Name
+                             }).ToList(),
+                             Type = c.Type,
                              ImgUrl = c.ImgUrl,
                              ImgInternetUrl = c.ImgInternetUrl,
                              Objects = currencyShopDb.Objects.Where(b => c.Id == b.CategoryId).Select(b => new RObjects()
-                            {
+                             {
                                  Id = b.Id,
-                                CategoryId = b.CategoryId,
-                                Name = b.Name
-                            }).ToList(),
+                                 CategoryId = b.CategoryId,
+                                 Name = b.Name
+                             }).ToList(),
 
 
                          };
-            if (entity.Count()>0)
+            if (entity.Count() > 0)
             {
                 return Ok(entity);
             }
-            else {
+            else
+            {
                 return NotFound("There is no data");
             }
         }
@@ -143,7 +148,7 @@ namespace CurrencyShop.Controllers
         public IActionResult Get(int id)
         {
             var entity = from c in currencyShopDb.Categories
-                         where c.Id==id
+                         where c.Id == id
                          select new RCategory()
                          {
                              Id = c.Id,
@@ -153,9 +158,9 @@ namespace CurrencyShop.Controllers
                                  categoryId = b.categoryId,
                                  Name = b.Name
                              }).ToList(),
-                             ImgUrl=c.ImgUrl,
-                             ImgInternetUrl=c.ImgInternetUrl,
-                             Type = c.Type ,
+                             ImgUrl = c.ImgUrl,
+                             ImgInternetUrl = c.ImgInternetUrl,
+                             Type = c.Type,
                              Objects = currencyShopDb.Objects.Where(b => c.Id == b.CategoryId).Select(b => new RObjects()
                              {
                                  Id = b.Id,
@@ -165,7 +170,7 @@ namespace CurrencyShop.Controllers
 
 
                          };
-            if (entity.Count()>0)
+            if (entity.Count() > 0)
             {
                 return Ok(entity);
             }
@@ -173,7 +178,7 @@ namespace CurrencyShop.Controllers
             {
                 return NotFound("There is no data");
             }
-      
+
 
 
         }
@@ -190,8 +195,8 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(imageUrl);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot/AdsImage";
+            var file = $"{guid}.svg";
+            var folder = "wwwroot/category";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
             var response = FileHelper.UploadPhoto(stream, folder, file);

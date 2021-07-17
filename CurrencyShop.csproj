@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AspNetCore.Authentication.Plugin" Version="1.0.1" />
     <PackageReference Include="AspNetCore.ImageUploader" Version="1.0.0" />
     <PackageReference Include="AspNetCoreRateLimit" Version="4.0.1" />
@@ -29,6 +36,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.4" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\currency\" />
   </ItemGroup>
     <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

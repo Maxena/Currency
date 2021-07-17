@@ -18,10 +18,10 @@ namespace CurrencyShop.Controllers
     [ApiVersion("1.0")]
     [Route("api/web/v{version:apiVersion}/category")]
     [ApiController]
-    public class WebAppCategoryController : ControllerBase
+    public class WebCategoryController : ControllerBase
     {
         private CurrencyShopDb currencyShopDb;
-        public WebAppCategoryController(CurrencyShopDb db)
+        public WebCategoryController(CurrencyShopDb db)
         {
             this.currencyShopDb = db;
         }
@@ -54,8 +54,8 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(imageArray);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot/AdsImage";
+            var file = $"{guid}.svg";
+            var folder = "wwwroot/category";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
             var response = FileHelper.UploadPhoto(stream, folder, file);
@@ -195,8 +195,8 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(imageUrl);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.jpg";
-            var folder = "wwwroot/AdsImage";
+            var file = $"{guid}.svg";
+            var folder = "wwwroot/category";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
             var response = FileHelper.UploadPhoto(stream, folder, file);
