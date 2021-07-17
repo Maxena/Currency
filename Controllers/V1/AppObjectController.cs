@@ -107,7 +107,7 @@ namespace CurrencyShop.Controllers
         {
 
             var vehicle = from v in currencyShopDb.Objects
-                          where v.CategoryId == 1
+                          where v.CategoryId == 2
                           select new RObjects()
                           {
                               Id = v.Id,
@@ -133,7 +133,7 @@ namespace CurrencyShop.Controllers
         {
 
             var vehicle = from v in currencyShopDb.Objects
-                          where v.CategoryId == 1
+                          where v.CategoryId == 2
                           where v.BrandName == brandName
                           select new RObjects()
                           {
@@ -151,6 +151,7 @@ namespace CurrencyShop.Controllers
                 return NotFound("any mobile doesnt exist");
         }
         /// <response code="200">get object successfully</response>
+        /// <response code="404">any objects doesnt exist</response>
 
         [HttpGet]
         [MapToApiVersion("1")]
@@ -158,7 +159,22 @@ namespace CurrencyShop.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
         public IActionResult objects()
         {
-            return Ok(currencyShopDb.Objects);
+
+            var objects = from m in currencyShopDb.Objects
+                          select new RObjects()
+                          {
+                              Id = m.Id,
+                              BrandName = m.BrandName,
+                              Name = m.Name,
+                              Price = m.Price,
+                              ProduceYear = m.ProduceYear,
+                              DatePosted = m.DatePosted,
+
+                          };
+            if (objects.Count() > 0)
+                return Ok(objects);
+            else
+                return NotFound("any objects doesnt exist");
         }
         /// <response code="200">get object successfully</response>
         [HttpGet("filter/{startPrice}")]
@@ -171,7 +187,7 @@ namespace CurrencyShop.Controllers
                           where m.Price >= startPrice
                           select new RObjects()
                           {
-                              Id = m.Id,
+                              Id=m.Id,
                               BrandName = m.BrandName,
                               Name = m.Name,
                               Price = m.Price,
@@ -372,7 +388,7 @@ namespace CurrencyShop.Controllers
         public IActionResult search(string search)
         {
             var objects = from v in currencyShopDb.Objects
-                          where v.Name.StartsWith(search)
+                          where v.Name.Contains(search)
                           select new RObjects()
                           {
                               Id = v.Id,

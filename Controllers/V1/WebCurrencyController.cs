@@ -3,11 +3,13 @@ using CurrencyShop.Data;
 using CurrencyShop.Helper;
 using CurrencyShop.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -104,7 +106,7 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(image.image);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.svg";
+            var file = $"{guid}.png";
             var folder = "wwwroot/currency";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
@@ -180,6 +182,7 @@ namespace CurrencyShop.Controllers
             else
                 return NotFound("Currency not found");
         }
+
         /// <response code="200">Get List of Price successfull</response>
         /// <response code="202">prices history not found</response>
         [HttpGet("{name}")]
@@ -414,7 +417,7 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(image.image);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.svg";
+            var file = $"{guid}.png";
             var folder = "wwwroot/currency";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);

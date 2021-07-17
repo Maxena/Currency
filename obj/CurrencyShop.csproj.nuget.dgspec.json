@@ -82,6 +82,10 @@
               "target": "Package",
               "version": "[1.10.14, )"
             },
+            "Paket.Core": {
+              "target": "Package",
+              "version": "[5.258.1, )"
+            },
             "Swashbuckle": {
               "target": "Package",
               "version": "[5.6.0, )"
@@ -113,6 +117,10 @@
             "Swashbuckle.AspNetCore.SwaggerUI": {
               "target": "Package",
               "version": "[6.1.4, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[5.0.2, )"
             }
           },
           "imports": [

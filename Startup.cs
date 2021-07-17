@@ -140,6 +140,7 @@ namespace CurrencyShop
             app.UseIpRateLimiting();
 
             app.UseCors("MyPolicy");
+            app.UseStaticFiles();
             app.UseSwagger(c =>
             {
                 c.SerializeAsV2 = true;

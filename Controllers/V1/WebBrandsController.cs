@@ -53,7 +53,7 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(imageArray);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.svg";
+            var file = $"{guid}.png";
             var folder = "wwwroot/brand";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
@@ -159,7 +159,7 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(imageUrl);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.svg";
+            var file = $"{guid}.png";
             var folder = "wwwroot/brand";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);

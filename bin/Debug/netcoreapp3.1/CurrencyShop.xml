@@ -226,6 +226,7 @@
         </member>
         <member name="M:CurrencyShop.Controllers.AppObjectController.objects">
             <response code="200">get object successfully</response>
+            <response code="404">any objects doesnt exist</response>
         </member>
         <member name="M:CurrencyShop.Controllers.AppObjectController.Filter(System.Int32)">
             <response code="200">get object successfully</response>
@@ -335,33 +336,33 @@
             <response code="200">Change successfull</response>
             <response code="404">this brand dose not exist!</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.Post(System.Collections.Generic.List{CurrencyShop.Models.Category})">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.Post(System.Collections.Generic.List{CurrencyShop.Models.Category})">
             <response code="200">Get category successfull</response>
             <response code="404">There is no category</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.imgUrl(System.Int32,System.Byte[])">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.imgUrl(System.Int32,System.Byte[])">
             <response code="200">Image Uploaded</response>
             <response code="404">There is no category</response>
             <response code="401">image does not uploded</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.imgUrl(System.Int32,System.String)">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.imgUrl(System.Int32,System.String)">
             <response code="200">Image Uploaded</response>
             <response code="404">There is no Image</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.Get">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.Get">
             <response code="200">Get category successfull</response>
             <response code="404">There is no category</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.Get(System.Int32)">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.Get(System.Int32)">
             <response code="200">Get category successfull</response>
             <response code="404">There is no category</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.imageUrl(System.Int32,System.Byte[])">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.imageUrl(System.Int32,System.Byte[])">
             <response code="200">Change successfull</response>
             <response code="404">this Category dose not exist!</response>
             <response code="401">No image has been uploaded!</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebAppCategoryController.imageurlInternet(System.Int32,System.String)">
+        <member name="M:CurrencyShop.Controllers.WebCategoryController.imageurlInternet(System.Int32,System.String)">
             <response code="200">Change successfull</response>
             <response code="404">this Category dose not exist!</response>
         </member>
@@ -399,7 +400,7 @@
         <member name="M:CurrencyShop.Controllers.WebCurrencyController.Currency(CurrencyShop.Models.Currency)">
             <response code="200">added data successfuly!</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebCurrencyController.imgUrl(System.Int32,System.Byte[])">
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.imgUrl(System.Int32,CurrencyShop.Models.imageModel)">
             <response code="200">Image Uploaded</response>
             <response code="404">There is no currency</response>
             <response code="401">image does not uploded</response>
@@ -450,7 +451,7 @@
         <member name="M:CurrencyShop.Controllers.WebCurrencyController.perMonth(System.Int32)">
             <response code="200">delete data successfull</response>
         </member>
-        <member name="M:CurrencyShop.Controllers.WebCurrencyController.imageUrl(System.Int32,System.Byte[])">
+        <member name="M:CurrencyShop.Controllers.WebCurrencyController.imageUrl(System.Int32,CurrencyShop.Models.imageModel)">
             <response code="200">Change successfull</response>
             <response code="404">this currency dose not exist!</response>
             <response code="401">No image has been uploaded!</response>
@@ -482,6 +483,7 @@
         </member>
         <member name="M:CurrencyShop.Controllers.WebObjectController.objects">
             <response code="200">get object successfully</response>
+            <response code="404">any objects doesnt exist</response>
         </member>
         <member name="M:CurrencyShop.Controllers.WebObjectController.Filter(System.Int32)">
             <response code="200">get object successfully</response>

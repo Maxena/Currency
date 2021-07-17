@@ -3,11 +3,13 @@ using CurrencyShop.Data;
 using CurrencyShop.Helper;
 using CurrencyShop.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +23,7 @@ namespace CurrencyShop.Controllers
     public class AppCurrencyController : ControllerBase {
 
 
-
+      
         private IConfiguration _configuration;
         private readonly AuthService _auth;
         private CurrencyShopDb currencyShopDb;
@@ -37,7 +39,7 @@ namespace CurrencyShop.Controllers
         [HttpPost("prices")]
         [MapToApiVersion("1")]
         [Authorize]
-      
+
 
         public IActionResult price([FromBody] List<Prices> prices)
         {
@@ -52,7 +54,7 @@ namespace CurrencyShop.Controllers
         [HttpPost("price")]
         [MapToApiVersion("1")]
         [Authorize]
-     
+
         public IActionResult price([FromBody] Prices price)
         {
             currencyShopDb.Prices.Add(price);
@@ -63,9 +65,9 @@ namespace CurrencyShop.Controllers
         /// <response code="200">added data successfuly!</response>
         [HttpPost("currencies")]
         [MapToApiVersion("1")]
-        
+
         [Authorize]
-     
+
         public IActionResult currency([FromBody] List<Currency> currencies)
         {
 
@@ -79,13 +81,13 @@ namespace CurrencyShop.Controllers
         [HttpPost("currency")]
         [MapToApiVersion("1")]
         [Authorize]
-     
+
         public IActionResult Currency([FromBody] Currency currency)
         {
             currencyShopDb.Currency.Add(currency);
             currencyShopDb.SaveChanges();
             return Ok("added data successfuly!");
-     
+
 
         }
 
@@ -102,7 +104,7 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(image.image);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.svg";
+            var file = $"{guid}.png";
             var folder = "wwwroot/currency";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
@@ -152,7 +154,7 @@ namespace CurrencyShop.Controllers
         [HttpGet]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Currency>))]
-      
+
         public IActionResult currency()
 
         {
@@ -160,15 +162,15 @@ namespace CurrencyShop.Controllers
             var entity = from c in currencyShopDb.Currency select new RCurrency() {
                 Id = c.Id,
                 ImgInternetUrl = c.ImgInternetUrl,
-                ImgUrl=c.ImgUrl,
-                LastPrice=c.LastPrice,
-                LastUpdated=c.LastUpdated,
-                Name=c.Name,
-                Prices=c.Prices,
-                Type=c.Type,
-               
-                
-            } ;
+                ImgUrl = c.ImgUrl,
+                LastPrice = c.LastPrice,
+                LastUpdated = c.LastUpdated,
+                Name = c.Name,
+                Prices = c.Prices,
+                Type = c.Type,
+
+
+            };
             if (entity.Count() > 0)
             {
                 return Ok(entity);
@@ -176,6 +178,7 @@ namespace CurrencyShop.Controllers
             else
                 return NotFound("Currency not found");
         }
+       
         /// <response code="200">Get List of Price successfull</response>
         /// <response code="202">prices history not found</response>
         [HttpGet("{name}")]
@@ -408,7 +411,7 @@ namespace CurrencyShop.Controllers
 
             var stream = new MemoryStream(image.image);
             var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.svg";
+            var file = $"{guid}.png";
             var folder = "wwwroot/currency";
             var fullPath = $"{folder}/{file}";
             var imageFullPath = fullPath.Remove(0, 7);
