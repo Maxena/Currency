@@ -246,6 +246,9 @@
         <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryFilter(System.Int32,System.Int32,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
+        <member name="M:CurrencyShop.Controllers.AppObjectController.priceCategoryBrandFilterFirst(System.Int32,System.String,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
         <member name="M:CurrencyShop.Controllers.AppObjectController.priceLastCategoryBrandFilter(System.Int32,System.String,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
@@ -501,6 +504,9 @@
             <response code="200">get object successfully</response>
         </member>
         <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryFilter(System.Int32,System.Int32,System.Int32)">
+            <response code="200">get object successfully</response>
+        </member>
+        <member name="M:CurrencyShop.Controllers.WebObjectController.priceCategoryBrandFilterFirst(System.Int32,System.String,System.Int32)">
             <response code="200">get object successfully</response>
         </member>
         <member name="M:CurrencyShop.Controllers.WebObjectController.priceLastCategoryBrandFilter(System.Int32,System.String,System.Int32)">

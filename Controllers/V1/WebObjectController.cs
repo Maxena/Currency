@@ -204,7 +204,7 @@ namespace CurrencyShop.Controllers
         [HttpGet("filter/last/{lastPrice}")]
         [ActionName("object")]
         [MapToApiVersion("1")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Objects>))]
 
         public IActionResult priceLastFilter(int lastPrice)
         {
@@ -226,14 +226,14 @@ namespace CurrencyShop.Controllers
                 return NotFound("any objects doesnt exist");
         }
         /// <response code="200">get object successfully</response>
-        [HttpGet("filter/{startOrice}/{lastPrice}")]
+        [HttpGet("filter/{startPrice}/{lastPrice}")]
         [ActionName("object")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
         public IActionResult priceFilter(int startPrice, int lastPrice)
         {
             var objects = from m in currencyShopDb.Objects
-                          where m.Price >= startPrice && m.Price <= startPrice
+                          where m.Price >= startPrice && m.Price <= lastPrice
                           select new RObjects()
                           {
                               Id = m.Id,
@@ -302,7 +302,7 @@ namespace CurrencyShop.Controllers
                 return NotFound("any objects doesnt exist");
         }
         /// <response code="200">get object successfully</response>
-        [HttpGet("filter/category/{categoryId}/{startOrice}/{lastPrice}")]
+        [HttpGet("filter/category/{categoryId}/{startPrice}/{lastPrice}")]
         [ActionName("object")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
@@ -310,7 +310,7 @@ namespace CurrencyShop.Controllers
         {
             var objects = from m in currencyShopDb.Objects
                           where m.CategoryId == categoryId
-                          where m.Price >= startPrice && m.Price <= startPrice
+                          where m.Price >= startPrice && m.Price <= lastPrice
                           select new RObjects()
                           {
                               Id = m.Id,
@@ -327,7 +327,33 @@ namespace CurrencyShop.Controllers
                 return NotFound("any objects doesnt exist");
         }
         /// <response code="200">get object successfully</response>
-        [HttpGet("filter/category/{categoryId}/{brandId}/last/{lastPrice}")]
+        [HttpGet("filter/category/{categoryId}/{brandName}/{startPrice}")]
+        [ActionName("object")]
+        [MapToApiVersion("1")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
+        public IActionResult priceCategoryBrandFilterFirst(int categoryId, string brandName, int startPrice)
+        {
+            var objects = from m in currencyShopDb.Objects
+                          where m.CategoryId == categoryId
+                          where m.BrandName == brandName
+                          where m.Price >= startPrice
+                          select new RObjects()
+                          {
+                              Id = m.Id,
+                              BrandName = brandName,
+                              Name = m.Name,
+                              Price = m.Price,
+                              ProduceYear = m.ProduceYear,
+                              DatePosted = m.DatePosted,
+
+                          };
+            if (objects.Count() > 0)
+                return Ok(objects);
+            else
+                return NotFound("any objects doesnt exist");
+        }
+        /// <response code="200">get object successfully</response>
+        [HttpGet("filter/category/{categoryId}/{brandName}/last/{lastPrice}")]
         [ActionName("object")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
@@ -355,7 +381,7 @@ namespace CurrencyShop.Controllers
         }
 
         /// <response code="200">get object successfully</response>
-        [HttpGet("filter/category/{categoryId}/{brandId}/{startOrice}/{lastPrice}")]
+        [HttpGet("filter/category/{categoryId}/{brandName}/{startPrice}/{lastPrice}")]
         [ActionName("object")]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Object>))]
@@ -364,7 +390,7 @@ namespace CurrencyShop.Controllers
             var objects = from m in currencyShopDb.Objects
                           where m.CategoryId == categoryId
                           where m.BrandName == brandName
-                          where m.Price >= startPrice && m.Price <= startPrice
+                          where m.Price >= startPrice && m.Price <= lastPrice
                           select new RObjects()
                           {
                               Id = m.Id,
@@ -380,6 +406,7 @@ namespace CurrencyShop.Controllers
             else
                 return NotFound("any objects doesnt exist");
         }
+
 
         /// <response code="200">get object successfully</response>
         [HttpGet("[action]/{search}")]
