@@ -38,7 +38,7 @@ namespace CurrencyShop.Controllers
         }
         // GET: api/<MoneyController>
         /// <response code="200">added data successfuly!</response>
-        [HttpPost("prices")]
+        [HttpPost]
         [MapToApiVersion("1")]
         [Authorize]
 
@@ -51,21 +51,8 @@ namespace CurrencyShop.Controllers
 
         }
 
-
         /// <response code="200">added data successfuly!</response>
-        [HttpPost("price")]
-        [MapToApiVersion("1")]
-        [Authorize]
-
-        public IActionResult price([FromBody] Prices price)
-        {
-            currencyShopDb.Prices.Add(price);
-            currencyShopDb.SaveChanges();
-            return Ok("added data successfuly!");
-
-        }
-        /// <response code="200">added data successfuly!</response>
-        [HttpPost("currencies")]
+        [HttpPost]
         [MapToApiVersion("1")]
 
         [Authorize]
@@ -79,19 +66,7 @@ namespace CurrencyShop.Controllers
             return Ok("added data successfuly!");
 
         }
-        /// <response code="200">added data successfuly!</response>
-        [HttpPost("currency")]
-        [MapToApiVersion("1")]
-        [Authorize]
 
-        public IActionResult Currency([FromBody] Currency currency)
-        {
-            currencyShopDb.Currency.Add(currency);
-            currencyShopDb.SaveChanges();
-            return Ok("added data successfuly!");
-
-
-        }
 
         /// <response code="200">Image Uploaded</response>
         /// <response code="404">There is no currency</response>

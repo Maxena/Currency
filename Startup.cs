@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,7 @@ namespace CurrencyShop
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
                 c.DescribeAllParametersInCamelCase();
+                
                     c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -91,19 +93,8 @@ namespace CurrencyShop
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
                 });
-                        c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-           {
-             new OpenApiSecurityScheme
-             {
-               Reference = new OpenApiReference
-               {
-                 Type = ReferenceType.SecurityScheme,
-                 Id = "bearer"
-               }
-              },
-              new string[] { }
-            }
-          });
+                c.OperationFilter<SecurityRequirementsOperationFilter>();
+               
                     });
 
                

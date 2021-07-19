@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rwsmFHjEknxHd8utvkNQKvXAzu5OhwEICBkT/71DYk2dIh2c+F10621xAh38lctvJ0WJntD80atX33y/g5DABQ==",
+  "dgSpecHash": "afCQsXx2xowL+Yu5W4ATvZXvVVWTTKPhwt9GG6HcvxRUPSVfS8TifX09ctm0+x3z0pGGrT50ZPqppcoHUXfFPw==",
   "success": true,
   "projectFilePath": "F:\\currencyShop\\CurrencyShop\\CurrencyShop.csproj",
   "expectedPackageFiles": [
@@ -78,6 +78,7 @@
     "C:\\Users\\amind\\.nuget\\packages\\mono.cecil\\0.10.0-beta6\\mono.cecil.0.10.0-beta6.nupkg.sha512",
     "C:\\Users\\amind\\.nuget\\packages\\netstandard.library\\1.6.0\\netstandard.library.1.6.0.nupkg.sha512",
     "C:\\Users\\amind\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\amind\\.nuget\\packages\\ninject\\3.3.4\\ninject.3.3.4.nupkg.sha512",
     "C:\\Users\\amind\\.nuget\\packages\\paket.core\\5.258.1\\paket.core.5.258.1.nupkg.sha512",
     "C:\\Users\\amind\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\amind\\.nuget\\packages\\runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",

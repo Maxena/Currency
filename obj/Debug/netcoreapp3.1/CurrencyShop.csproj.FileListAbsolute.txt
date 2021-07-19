@@ -99,3 +99,4 @@ F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
 F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Ninject.dll

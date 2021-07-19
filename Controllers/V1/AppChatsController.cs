@@ -1,5 +1,6 @@
 ﻿using CurrencyShop.Data;
 using CurrencyShop.Models;
+using CurrencyShop.requestModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -89,12 +90,12 @@ namespace CurrencyShop.Controllers
         [ActionName("report")]
         [MapToApiVersion("1")]
 
-        public IActionResult dcrementRepot([FromBody] string email, int Seq)
+        public IActionResult dcrementRepot([FromBody]SeqModel reqChat)
         {
-            var userWithSameEmail = currencyShopDb.authenticateChatUsers.Where(u => u.Email == email);
+            var userWithSameEmail = currencyShopDb.authenticateChatUsers.Where(u => u.Email == reqChat.Email);
             if (userWithSameEmail != null)
             {
-                var entity = currencyShopDb.chatRooms.Find(Seq);
+                var entity = currencyShopDb.chatRooms.Find(reqChat.Seq);
                 if (entity != null)
                 {
                     if (entity.ReportSequnce > 1)
@@ -125,17 +126,17 @@ namespace CurrencyShop.Controllers
         /// <response code="200">saved Change</response>
         /// <response code="400">This message did not recive any reports</response>
         /// /// <response code="403">sign up first please</response>
-        [HttpPost("{id}/inc")]
+        [HttpPost("inc")]
         [ActionName("report")]
         [MapToApiVersion("1")]
     
-        public IActionResult incrementRepot([FromBody] string email, int Seq)
+        public IActionResult incrementRepot([FromBody] SeqModel reqChat)
         {
-            var userWithSameEmail = currencyShopDb.authenticateChatUsers.Where(u => u.Email == email);
+            var userWithSameEmail = currencyShopDb.authenticateChatUsers.Where(u => u.Email == reqChat.Email);
             if (userWithSameEmail != null)
             {
 
-                var entity = currencyShopDb.chatRooms.Find(Seq);
+                var entity = currencyShopDb.chatRooms.Find(reqChat.Seq);
                 if (entity != null)
                 {
                     entity.ReportSequnce++;
@@ -174,46 +175,6 @@ namespace CurrencyShop.Controllers
             return Ok(ChatList);
         }
 
-
-        [HttpGet]
-        [Authorize]
-        [MapToApiVersion("1")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<ChatRoom>))]
-        public IQueryable<object>report()
-        {
-            var ReportedList = from r in currencyShopDb.chatRooms
-                               where r.Report
-                               select new RChatRoom()
-                               {
-                                   Id= r.Id,
-                                   UserEmail = r.UserEmail,
-                                   Content = r.Content,
-                                   Sequence = r.ReportSequnce,
-                               };
-            return ReportedList;
-
-        }
-        /// <response code="200">saved Change</response>
-        /// <response code="404">This message not found</response>
-        [HttpDelete("{id}")]
-        [Authorize]
-        [MapToApiVersion("1")]
-
-      
-        public IActionResult report(int seq)
-        {
-            var entity = currencyShopDb.chatRooms.Find(seq);
-            if (entity != null)
-            {
-                currencyShopDb.chatRooms.Remove(entity);
-                currencyShopDb.SaveChanges();
-
-            }
-
-            return StatusCode(StatusCodes.Status404NotFound);
-
-
-        }
 
     }
 

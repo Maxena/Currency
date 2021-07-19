@@ -1,6 +1,7 @@
 ﻿using CurrencyShop.Data;
 using CurrencyShop.Helper;
 using CurrencyShop.Models;
+using CurrencyShop.requestModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,65 +41,7 @@ namespace CurrencyShop.Controllers
             else { return NotFound("There is no brand"); }
 
         }
-        /// <response code="200">Image Uploaded</response>
-        /// <response code="404">There is no brand</response>
-        /// <response code="401">image does not uploded</response>
 
-        [HttpPost("{id}")]
-        [Authorize]
-        [MapToApiVersion("1")]
-        public IActionResult imgUrl(int id, [FromBody] byte[] imageArray)
-        {
-
-
-            var stream = new MemoryStream(imageArray);
-            var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.png";
-            var folder = "wwwroot/brand";
-            var fullPath = $"{folder}/{file}";
-            var imageFullPath = fullPath.Remove(0, 7);
-            var response = FileHelper.UploadPhoto(stream, folder, file);
-
-            if (!response)
-            {
-                return BadRequest("image does not uploded");
-            }
-            var entity = currencyShopDb.Brands.Find(id);
-            if (entity != null)
-            {
-                entity.ImgUrl = imageFullPath;
-                currencyShopDb.SaveChanges();
-                return Ok("Image Uploaded");
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-
-
-        }
-        /// <response code="200">Image Uploaded</response>
-        /// <response code="404">There is no Image</response>
-
-        [HttpPost("internet/{id}")]
-        [Authorize]
-        [MapToApiVersion("1")]
-        public IActionResult imgUrl(int id, [FromBody] string url)
-        {
-            var entity = currencyShopDb.Brands.Find(id);
-            if (entity != null)
-            {
-                entity.ImgInternetUrl = url;
-                currencyShopDb.SaveChanges();
-                return Ok("Image Uploaded");
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-
-
-        }
         /// <response code="200">Get brands successfull</response>
         /// <response code="404">There is no brand</response>
         [HttpGet("{categoryId}")]
@@ -129,50 +72,39 @@ namespace CurrencyShop.Controllers
 
         /// <response code="200">Change brand successfull</response>
         /// <response code="404">this brand dose not exist!</response>
-        [HttpPatch("{id}/{name}")]
-        [MapToApiVersion("1")]
-        [Authorize]
-        public IActionResult brands(int id, string name)
-        {
-            var entity = currencyShopDb.Brands.Find(id);
-            if (entity != null)
-            {
-                entity.Name = name;
-                currencyShopDb.SaveChanges();
-                return Ok("Change successfull");
-            }
-            else
-            {
-                return NotFound("this brand dose not exist!");
-            }
-        }
-        /// <response code="200">Change successfull</response>
-        /// <response code="404">this brand dose not exist!</response>
-        /// <response code="401">No image has been uploaded!</response>
         [HttpPatch("{id}")]
         [MapToApiVersion("1")]
-        [ActionName("imgUrl")]
-
         [Authorize]
-        public IActionResult imageUrl(int id, [FromBody] byte[] imageUrl)
+        public IActionResult brands(int id, [FromBody] BrandModel brandModel)
         {
-
-            var stream = new MemoryStream(imageUrl);
-            var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.png";
-            var folder = "wwwroot/brand";
-            var fullPath = $"{folder}/{file}";
-            var imageFullPath = fullPath.Remove(0, 7);
-            var response = FileHelper.UploadPhoto(stream, folder, file);
-
-            if (!response)
-            {
-                return BadRequest("No image has been uploaded");
-            }
             var entity = currencyShopDb.Brands.Find(id);
             if (entity != null)
             {
-                entity.ImgUrl = imageFullPath;
+                if (brandModel.Name != null)
+                {
+                    entity.Name = brandModel.Name;
+                }
+                if (brandModel.ImageUrl != null)
+                {
+                    var stream = new MemoryStream(brandModel.ImageUrl);
+                    var guid = Guid.NewGuid().ToString();
+                    var file = $"{guid}.png";
+                    var folder = "wwwroot/brand";
+                    var fullPath = $"{folder}/{file}";
+                    var imageFullPath = fullPath.Remove(0, 7);
+                    var response = FileHelper.UploadPhoto(stream, folder, file);
+
+                    if (!response)
+                    {
+                        return BadRequest("No image has been uploaded");
+                    }
+                    entity.ImgUrl = imageFullPath;
+
+                }
+                if (brandModel.ImageInternetUrl != null)
+                {
+                    entity.ImgInternetUrl = brandModel.ImageInternetUrl;
+                }
                 currencyShopDb.SaveChanges();
                 return Ok("Change successfull");
             }
@@ -181,28 +113,8 @@ namespace CurrencyShop.Controllers
                 return NotFound("this brand dose not exist!");
             }
         }
-        /// <response code="200">Change successfull</response>
-        /// <response code="404">this brand dose not exist!</response>
-        [HttpPatch("internet/{id}")]
-        [ActionName("imgUrl")]
-        [MapToApiVersion("1")]
-
-        [Authorize]
-        public IActionResult imageurlInternet(int id, [FromBody] string imageUrl)
-        {
 
 
-            var entity = currencyShopDb.Brands.Find(id);
-            if (entity != null)
-            {
-                entity.ImgUrl = imageUrl;
-                currencyShopDb.SaveChanges();
-                return Ok("Change successfull");
-            }
-            else
-            {
-                return NotFound("this brand dose not exist!");
-            }
-        }
+
     }
 }

@@ -27,81 +27,6 @@ namespace CurrencyShop.Controllers
         }
         /// <response code="200">Get category successfull</response>
         /// <response code="404">There is no category</response>
-        [HttpPost]
-        [Authorize]
-        [MapToApiVersion("1")]
-
-        public IActionResult Post(List<Category> categories)
-        {
-            if (categories.Count > 0)
-            {
-                currencyShopDb.Categories.AddRange(categories.Distinct().ToList());
-                return Ok(currencyShopDb.Categories);
-            }
-            else { return NotFound("There is no brand"); }
-
-        }
-        /// <response code="200">Image Uploaded</response>
-        /// <response code="404">There is no category</response>
-        /// <response code="401">image does not uploded</response>
-
-        [HttpPost("{id}")]
-        [Authorize]
-        [MapToApiVersion("1")]
-        public IActionResult imgUrl(int id, [FromBody] byte[] imageArray)
-        {
-
-
-            var stream = new MemoryStream(imageArray);
-            var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.png";
-            var folder = "wwwroot/category";
-            var fullPath = $"{folder}/{file}";
-            var imageFullPath = fullPath.Remove(0, 7);
-            var response = FileHelper.UploadPhoto(stream, folder, file);
-
-            if (!response)
-            {
-                return BadRequest("image does not uploded");
-            }
-            var entity = currencyShopDb.Categories.Find(id);
-            if (entity != null)
-            {
-                entity.ImgUrl = imageFullPath;
-                currencyShopDb.SaveChanges();
-                return Ok("Image Uploaded");
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-
-
-        }
-        /// <response code="200">Image Uploaded</response>
-        /// <response code="404">There is no Image</response>
-
-        [HttpPost("internet/{id}")]
-        [Authorize]
-        [MapToApiVersion("1")]
-        public IActionResult imgUrl(int id, [FromBody] string url)
-        {
-            var entity = currencyShopDb.Categories.Find(id);
-            if (entity != null)
-            {
-                entity.ImgInternetUrl = url;
-                currencyShopDb.SaveChanges();
-                return Ok("Image Uploaded");
-            }
-            else
-            {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
-        }
-
-
-        /// <response code="200">Get category successfull</response>
-        /// <response code="404">There is no category</response>
         // GET: api/<ValuesController>
         [HttpGet]
         [MapToApiVersion("1")]
@@ -182,64 +107,7 @@ namespace CurrencyShop.Controllers
 
 
         }
-        /// <response code="200">Change successfull</response>
-        /// <response code="404">this Category dose not exist!</response>
-        /// <response code="401">No image has been uploaded!</response>
-        [HttpPatch("{id}")]
-        [MapToApiVersion("1")]
-        [ActionName("imgUrl")]
-
-        [Authorize]
-        public IActionResult imageUrl(int id, [FromBody] byte[] imageUrl)
-        {
-
-            var stream = new MemoryStream(imageUrl);
-            var guid = Guid.NewGuid().ToString();
-            var file = $"{guid}.png";
-            var folder = "wwwroot/category";
-            var fullPath = $"{folder}/{file}";
-            var imageFullPath = fullPath.Remove(0, 7);
-            var response = FileHelper.UploadPhoto(stream, folder, file);
-
-            if (!response)
-            {
-                return BadRequest("No image has been uploaded");
-            }
-            var entity = currencyShopDb.Categories.Find(id);
-            if (entity != null)
-            {
-                entity.ImgUrl = imageFullPath;
-                currencyShopDb.SaveChanges();
-                return Ok("Change successfull");
-            }
-            else
-            {
-                return NotFound("this brand dose not exist!");
-            }
-        }
-        /// <response code="200">Change successfull</response>
-        /// <response code="404">this Category dose not exist!</response>
-        [HttpPatch("internet/{id}")]
-        [ActionName("imgUrl")]
-        [MapToApiVersion("1")]
-
-        [Authorize]
-        public IActionResult imageurlInternet(int id, [FromBody] string imageUrl)
-        {
-
-
-            var entity = currencyShopDb.Categories.Find(id);
-            if (entity != null)
-            {
-                entity.ImgUrl = imageUrl;
-                currencyShopDb.SaveChanges();
-                return Ok("Change successfull");
-            }
-            else
-            {
-                return NotFound("this brand dose not exist!");
-            }
-        }
+      
     }
 }
 

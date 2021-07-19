@@ -82,6 +82,10 @@
               "target": "Package",
               "version": "[1.10.14, )"
             },
+            "Ninject": {
+              "target": "Package",
+              "version": "[3.3.4, )"
+            },
             "Paket.Core": {
               "target": "Package",
               "version": "[5.258.1, )"
