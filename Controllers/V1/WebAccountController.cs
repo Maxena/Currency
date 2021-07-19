@@ -1,13 +1,14 @@
 ﻿using AuthenticationPlugin;
 using CurrencyShop.Data;
 using CurrencyShop.Models;
-
+using CurrencyShop.requestModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
@@ -40,7 +41,7 @@ namespace CurrencyShop.Controllers
         [HttpPost]
         [MapToApiVersion("1.0")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JwtToken))]
 
         public IActionResult register([FromBody] PannelUser pannelUser)
         {
@@ -66,10 +67,11 @@ namespace CurrencyShop.Controllers
              new Claim(ClaimTypes.Email,  pannelUser.Email),
               };
                 var token = _auth.GenerateAccessToken(claims);
-                var result = token.AccessToken;
+                JwtToken jwt = new JwtToken();
+                jwt.Token = token.AccessToken;
+              
 
-
-                return StatusCode(StatusCodes.Status201Created, result);
+                return StatusCode(StatusCodes.Status201Created, jwt);
             }
 
 
@@ -78,9 +80,11 @@ namespace CurrencyShop.Controllers
         /// <response code="200">Get Token successfully</response>
         /// <response code="401">Invalid email or password</response>
         /// <response code="404">the user dosent exist</response>
+      
         [HttpPost]
+    
         [MapToApiVersion("1.0")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(JwtToken))]
 
         public IActionResult login([FromBody] LoginModel pannelUser)
         {
@@ -99,10 +103,11 @@ namespace CurrencyShop.Controllers
              new Claim(ClaimTypes.Email,  pannelUser.email),
               };
             var token = _auth.GenerateAccessToken(claims);
-
+            JwtToken jwt = new JwtToken();
+            jwt.Token = token.AccessToken;
             return Ok(
 
-                token.AccessToken
+              jwt
             );
 
         }

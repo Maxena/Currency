@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace CurrencyShop.requestModel
 {
-    public class BrandModel
+    public class CategoryModel
     {
-        public string Name { get; set; }
+        public string Type { get; set; }
+       
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string ImageInternetUrl { get; set; }
+        public string ImgInternetUrl { get; set; }
         [NotMapped]
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public byte[] ImageUrl { get; set; }
+        public byte[] ImageArray { get; set; }
     }
 }

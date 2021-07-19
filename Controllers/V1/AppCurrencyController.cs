@@ -40,152 +40,141 @@ namespace CurrencyShop.Controllers
         [HttpGet]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Currency>))]
+        [ActionName("")]
 
-        public IActionResult currency()
+        public IActionResult currency([FromQuery] bool all=false,int type = 0)
 
         {
-
-            var entity = from c in currencyShopDb.Currency select new RCurrency() {
-                Id = c.Id,
-                ImgInternetUrl = c.ImgInternetUrl,
-                ImgUrl = c.ImgUrl,
-                LastPrice = c.LastPrice,
-                LastUpdated = c.LastUpdated,
-                Name = c.Name,
-                Prices = c.Prices,
-                Type = c.Type,
-
-
-            };
-            if (entity.Count() > 0)
+            if (all)
             {
-                return Ok(entity);
+                var entity = from c in currencyShopDb.Currency
+                             select new RCurrency()
+                             {
+                                 Id = c.Id,
+                                 ImgInternetUrl = c.ImgInternetUrl,
+                                 ImgUrl = c.ImgUrl,
+                                 LastPrice = c.LastPrice,
+                                 LastUpdated = c.LastUpdated,
+                                 Name = c.Name,
+                                 Prices = c.Prices,
+                                 Type = c.Type,
+
+
+                             };
+                if (entity.Count() > 0)
+                {
+                    return Ok(entity);
+                }
+                else
+                    return NotFound("Currency not found");
             }
-            else
-                return NotFound("Currency not found");
+            if(type>0)
+            {
+                var currency = from c in currencyShopDb.Currency
+                             where c.Type == type
+                             select new RCurrency()
+                             {
+                                 Id = c.Id,
+                                 Name = c.Name,
+                                 LastPrice = c.LastPrice,
+                                 LastUpdated = c.LastUpdated,
+                                 Type = c.Type,
+                                 ImgUrl = c.ImgUrl,
+                                 ImgInternetUrl = c.ImgInternetUrl,
+                             };
+                if (currency.Count() > 0)
+                {
+                    return Ok(currency);
+                }
+                else
+                {
+                    return NotFound("prices history not found");
+                }
+            }
+            
+            return NotFound("Currency not found");
         }
        
         /// <response code="200">Get List of Price successfull</response>
         /// <response code="202">prices history not found</response>
-        [HttpGet("{name}")]
+        [HttpGet]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Prices>))]
 
-        public IActionResult price(string name)
-        {
-            var prices = from p in currencyShopDb.Prices
-                         where p.Name == name
-                         select new RPrices()
-                         {
-                             Id = p.Id,
-                             Price = p.Price,
-                             Updated = p.Updated,
+        public IActionResult price([FromQuery] string name="دلار آمریکا",int duration =0,bool max=false,bool min=false)
+        {   if (max && name.Length > 0)
+            {
+                var prices = currencyShopDb.Prices.Where(p => p.Name == name).Where(p => (DateTime.Now - p.Updated).TotalDays < 1).Select(c => new RPrices() { Id = c.Id, Name = c.Name, Price = c.Price, Updated = c.Updated }).Max(p => p.Price);
+                if (prices > 0)
+                {
+                    return Ok(prices);
+                }
+                else
+                {
+                    return NotFound("max prices not found");
+                }
+            }
+            if (max && name.Length > 0)
+            {
+                var prices = currencyShopDb.Prices.Where(p => p.Name == name).Where(p => (DateTime.Now - p.Updated).TotalDays < 1).Select(c => new RPrices() { Id = c.Id, Name = c.Name, Price = c.Price, Updated = c.Updated }).Min(p => p.Price);
+                if (prices > 0)
+                {
+                    return Ok(prices);
+                }
+                else
+                {
+                    return NotFound("max prices not found");
+                }
+            }
+            else if (duration > 0 && name.Length > 0)
+            {
+                var pricesObj = from p in currencyShopDb.Prices
+                                where p.Name == name
+                                where (DateTime.Now - p.Updated).TotalDays <= duration
+                                select new RPrices()
+                                {
+                                    Name = p.Name,
+                                    Id = p.Id,
+                                    Price = p.Price,
+                                    Updated = p.Updated,
 
-                         };
-            if (prices.Count() > 0)
-            {
-                return Ok(prices);
+                                };
+                if (pricesObj.Count() > 0)
+                {
+                    return Ok(pricesObj);
+                }
+                else
+                {
+                    return NotFound("prices history not found");
+                }
             }
-            else
+            else if (name.Length > 0)
             {
-                return NotFound("prices history not found");
+                var prices = from p in currencyShopDb.Prices
+                             where p.Name == name
+                             select new RPrices()
+                             {
+                                 Id = p.Id,
+                                 Price = p.Price,
+                                 Updated = p.Updated,
+
+                             };
+                if (prices.Count() > 0)
+                {
+                    return Ok(prices);
+                }
+                else
+                {
+                    return NotFound("prices history not found");
+                }
             }
+            return BadRequest("invalid Parameter");
         }
-        /// <response code="200">Get List of Price successfull</response>
-        /// <response code="202">prices history not found</response>
-        [HttpGet("{type}")]
-        [MapToApiVersion("1")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Prices>))]
-
-        public IActionResult type(int type)
-        {
-            var prices = from c in currencyShopDb.Currency
-                         where c.Type == type
-                         select new RCurrency()
-                         {
-                             Id = c.Id,
-                             Name=c.Name,
-                             LastPrice = c.LastPrice,
-                             LastUpdated = c.LastUpdated,
-                             Type = c.Type,
-                             ImgUrl = c.ImgUrl,
-                             ImgInternetUrl = c.ImgInternetUrl,
-                         };
-            if (prices.Count() > 0)
-            {
-                return Ok(prices);
-            }
-            else
-            {
-                return NotFound("prices history not found");
-            }
-        }
-        /// <response code="200">Get List of Price successfull</response>
-        /// <response code="202">prices history not found</response>
-        [HttpGet("{name}/{day}")]
-        [MapToApiVersion("1")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Prices>))]
-
-        public IActionResult price(string name,int duration)
-        {
-            var prices = from p in currencyShopDb.Prices
-                         where p.Name == name
-                         where (DateTime.Now - p.Updated).TotalDays<=duration
-                         select new RPrices()
-                         {
-                             Name = p.Name,
-                             Id = p.Id,
-                             Price = p.Price,
-                             Updated = p.Updated,
-
-                         };
-            if (prices.Count() > 0)
-            {
-                return Ok(prices);
-            }
-            else
-            {
-                return NotFound("prices history not found");
-            }
-        }
-        /// <response code="200">Get List of Price successfull</response>
-        /// <response code="202">max prices not found</response>
-        [HttpGet("{name}/max")]
-        [MapToApiVersion("1")]
-        [ActionName("price")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Prices>))]
-
-        public IActionResult maxPrices(string name)
-        {
-            var prices = currencyShopDb.Prices.Where(p=>p.Name==name).Where(p => (DateTime.Now-p.Updated).TotalDays < 1).Select(c=>new RPrices() {Id= c.Id,Name=c.Name,Price=c.Price,Updated=c.Updated}) .Max(p => p.Price);
-                       if (prices > 0)
-            {
-                return Ok(prices);
-            }
-            else
-            {
-                return NotFound("max prices not found");
-            }
-        }
-        /// <response code="200">Get List of Price successfull</response>
-        /// <response code="202">max prices not found</response>
-        [HttpGet("{name}/min")]
-        [MapToApiVersion("1")]
-        [ActionName("price")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Prices>))]
-
-        public IActionResult minPrices(string name)
-        {
-            var prices = currencyShopDb.Prices.Where(p => p.Name == name).Where(p => (DateTime.Now - p.Updated ).TotalDays < 1).Select(c => new RPrices() { Id = c.Id, Name = c.Name, Price = c.Price, Updated = c.Updated }).Min(p => p.Price);
-            if (prices > 0)
-            {
-                return Ok(prices);
-            }
-            else
-            {
-                return NotFound("max prices not found");
-            }
-        }
+       
+       
+    
+      
+        
   
 
 

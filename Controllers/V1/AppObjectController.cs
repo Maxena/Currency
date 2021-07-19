@@ -24,297 +24,221 @@ namespace CurrencyShop.Controllers
         {
             this.currencyShopDb = db;
         }
-    
-        /// <response code="200">get mobile successfully</response>
-        /// <response code="404">any mobile doesnt exist</response>
-        [HttpGet("{categoryId}")]
+
+        /// <response code="200">get Objects successfully</response>
+        /// <response code="404">any Objects doesnt exist</response>
+        /// <response code="400">request invalid</response>
+        [HttpGet]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Objects>))]
-
-        public IActionResult type(int categoryId)
+        [ActionName("")]
+        public IActionResult objects([FromQuery]bool all=false,int categoryId=0,string brandName="ساپیا",int startPrice=0,int lastPrice=0)
         {
-            var mobiles = from m in currencyShopDb.Objects
-                          where m.CategoryId == categoryId
-                          select new RObjects()
-                          {
+            if (all)
+            {
+                if (startPrice > 0 && lastPrice <= 0)
+                {
+                    var objects = from m in currencyShopDb.Objects
+                                  where m.Price >= startPrice
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
 
-                              Id = m.Id,
-                              BrandName = m.BrandName,
-                              Name = m.Name,
-                              Price = m.Price,
-                              ProduceYear = m.ProduceYear,
-                              DatePosted = m.DatePosted,
-                          };
-            if (mobiles.Count() > 0)
-                return Ok(mobiles);
-            else
-                return NotFound("any mobile doesnt exist");
+                                  };
+
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+                else if (startPrice > 0 && lastPrice > 0)
+                {
+                    var objects = from m in currencyShopDb.Objects
+                                  where m.Price >= startPrice && m.Price <= lastPrice
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
+                                      CategoryId = m.CategoryId,
+
+                                  };
+
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+                else if(startPrice <= 0 && lastPrice >0)
+                {
+                    var objects = from m in currencyShopDb.Objects
+                                  where m.Price <= lastPrice
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
+                                      CategoryId = m.CategoryId,
+
+                                  };
+
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+                  else{  var objects = from m in currencyShopDb.Objects
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
+                                      CategoryId = m.CategoryId,
+
+                                  };
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+            }
+            if (brandName.Length > 0 && categoryId > 0)
+            {
+
+                if (startPrice > 0 && lastPrice <= 0)
+                {
+                    var objects = from m in currencyShopDb.Objects
+                                  where m.CategoryId == categoryId
+                                  where m.BrandName == brandName
+                                  where m.Price >= startPrice
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
+                                      CategoryId=m.CategoryId,
+
+                                  };
+
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+
+                else if (startPrice <= 0 && lastPrice > 0)
+                {
+                    var objects = from m in currencyShopDb.Objects
+                                  where m.CategoryId == categoryId
+                                  where m.BrandName == brandName
+                                  where m.Price <= lastPrice
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
+                                      CategoryId = m.CategoryId,
+
+                                  };
+
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+                else if ((startPrice > 0 && lastPrice > 0))
+                {
+                    var objects = from m in currencyShopDb.Objects
+                                  where m.CategoryId == categoryId
+                                  where m.BrandName == brandName
+                                  where m.Price >= startPrice && m.Price <= lastPrice
+                                  select new RObjects()
+                                  {
+                                      Id = m.Id,
+                                      BrandName = m.BrandName,
+                                      Name = m.Name,
+                                      Price = m.Price,
+                                      ProduceYear = m.ProduceYear,
+                                      DatePosted = m.DatePosted,
+                                      CategoryId = m.CategoryId,
+
+                                  };
+
+                    if (objects.Count() > 0)
+                        return Ok(objects);
+                    else
+                        return NotFound("any objects doesnt exist");
+                }
+                else
+                {
+                    var objectsObj = from m in currencyShopDb.Objects
+                                     where m.CategoryId == categoryId
+                                     where m.BrandName == brandName
+                                     select new RObjects()
+                                     {
+                                         Id = m.Id,
+                                         BrandName = m.BrandName,
+                                         Name = m.Name,
+                                         Price = m.Price,
+                                         ProduceYear = m.ProduceYear,
+                                         DatePosted = m.DatePosted,
+                                         CategoryId = m.CategoryId,
+
+                                     };
+                    if (objectsObj.Count() > 0)
+                        return Ok(objectsObj);
+                    else
+                        return NotFound("any mobile doesnt exist");
+                }
+            }
+            if (categoryId > 0)
+            {
+                var objectsObj = from m in currencyShopDb.Objects
+                                 where m.CategoryId == categoryId
+                                 select new RObjects()
+                                 {
+
+                                     Id = m.Id,
+                                     BrandName = m.BrandName,
+                                     Name = m.Name,
+                                     Price = m.Price,
+                                     ProduceYear = m.ProduceYear,
+                                     DatePosted = m.DatePosted,
+                                     CategoryId = m.CategoryId,
+                                 };
+                if (objectsObj.Count() > 0)
+                    return Ok(objectsObj);
+                else
+                    return NotFound("any Objects doesnt exist");
+            }
+           
+            
+            return BadRequest("request invalid");
         }
+
    
-        /// <response code="200">get mobile successfully</response>
-        /// <response code="404">any mobile doesnt exist</response>
-        [HttpGet("{categoryId}/{brandName}")]
-        [AllowAnonymous]
-        [MapToApiVersion("1")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Objects>))]
-        public IActionResult type(int categoryId, string brandName)
-        {
-            var mobiles = from m in currencyShopDb.Objects
-                          where m.CategoryId == categoryId
-                          where m.BrandName == brandName
-                          select new RObjects()
-                          {
-                              Id = m.Id,
-                              BrandName = m.BrandName,
-                              Name = m.Name,
-                              Price = m.Price,
-                              ProduceYear = m.ProduceYear,
-                              DatePosted = m.DatePosted,
-
-                          };
-            if (mobiles.Count() > 0)
-                return Ok(mobiles);
-            else
-                return NotFound("any mobile doesnt exist");
-        }
-
-        [HttpGet]
-        [MapToApiVersion("1")]
-        [ActionName("object")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Objects>))]
-        public IActionResult objects()
-        {
-
-            var objects = from m in currencyShopDb.Objects
-                          select new RObjects()
-                          {
-                              Id = m.Id,
-                              BrandName = m.BrandName,
-                              Name = m.Name,
-                              Price = m.Price,
-                              ProduceYear = m.ProduceYear,
-                              DatePosted = m.DatePosted,
-
-                          };
-            if (objects.Count() > 0)
-                return Ok(objects);
-            else
-                return NotFound("any objects doesnt exist");
-        }
-        /// <response code="200">get object successfully</response>
-        [HttpGet]
-        [MapToApiVersion("1")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Objects>))]
-        public IActionResult Filter(FilterModel model)
-        {
-            if (model.CategoryId <= 0)
-            {
-                if (model.StartPrice > 0 && model.LastPrice <= 0)
-                {
-                    var objects = from m in currencyShopDb.Objects
-                                  where m.Price >= model.StartPrice
-                                  select new RObjects()
-                                  {
-                                      Id = m.Id,
-                                      BrandName = m.BrandName,
-                                      Name = m.Name,
-                                      Price = m.Price,
-                                      ProduceYear = m.ProduceYear,
-                                      DatePosted = m.DatePosted,
-
-                                  };
-
-                    if (objects.Count() > 0)
-                        return Ok(objects);
-                    else
-                        return NotFound("any objects doesnt exist");
-                }
-                if (model.StartPrice > 0 && model.LastPrice > 0)
-                {
-                    var objects = from m in currencyShopDb.Objects
-                                  where m.Price >= model.StartPrice && m.Price <= model.LastPrice
-                                  select new RObjects()
-                                  {
-                                      Id = m.Id,
-                                      BrandName = m.BrandName,
-                                      Name = m.Name,
-                                      Price = m.Price,
-                                      ProduceYear = m.ProduceYear,
-                                      DatePosted = m.DatePosted,
-
-                                  };
-
-                    if (objects.Count() > 0)
-                        return Ok(objects);
-                    else
-                        return NotFound("any objects doesnt exist");
-                }
-                else
-                {
-                    var objects = from m in currencyShopDb.Objects
-                                  where m.Price <= model.LastPrice
-                                  select new RObjects()
-                                  {
-                                      Id = m.Id,
-                                      BrandName = m.BrandName,
-                                      Name = m.Name,
-                                      Price = m.Price,
-                                      ProduceYear = m.ProduceYear,
-                                      DatePosted = m.DatePosted,
-
-                                  };
-
-                    if (objects.Count() > 0)
-                        return Ok(objects);
-                    else
-                        return NotFound("any objects doesnt exist");
-                }
-            }
-            else
-            {
-                if (model.BrandName != null)
-                {
-                    if (model.StartPrice > 0 && model.LastPrice <= 0)
-                    {
-                        var objects = from m in currencyShopDb.Objects
-                                      where m.CategoryId == model.CategoryId
-                                      where m.BrandName == model.BrandName
-                                      where m.Price >= model.StartPrice
-                                      select new RObjects()
-                                      {
-                                          Id = m.Id,
-                                          BrandName = m.BrandName,
-                                          Name = m.Name,
-                                          Price = m.Price,
-                                          ProduceYear = m.ProduceYear,
-                                          DatePosted = m.DatePosted,
-
-                                      };
-
-                        if (objects.Count() > 0)
-                            return Ok(objects);
-                        else
-                            return NotFound("any objects doesnt exist");
-                    }
-
-                    else if (model.StartPrice <= 0 && model.LastPrice > 0)
-                    {
-                        var objects = from m in currencyShopDb.Objects
-                                      where m.CategoryId == model.CategoryId
-                                      where m.BrandName == model.BrandName
-                                      where m.Price <= model.LastPrice
-                                      select new RObjects()
-                                      {
-                                          Id = m.Id,
-                                          BrandName = m.BrandName,
-                                          Name = m.Name,
-                                          Price = m.Price,
-                                          ProduceYear = m.ProduceYear,
-                                          DatePosted = m.DatePosted,
-
-                                      };
-
-                        if (objects.Count() > 0)
-                            return Ok(objects);
-                        else
-                            return NotFound("any objects doesnt exist");
-                    }
-                    else
-                    {
-                        var objects = from m in currencyShopDb.Objects
-                                      where m.CategoryId == model.CategoryId
-                                      where m.BrandName == model.BrandName
-                                      where m.Price >= model.StartPrice && m.Price <= model.LastPrice
-                                      select new RObjects()
-                                      {
-                                          Id = m.Id,
-                                          BrandName = m.BrandName,
-                                          Name = m.Name,
-                                          Price = m.Price,
-                                          ProduceYear = m.ProduceYear,
-                                          DatePosted = m.DatePosted,
-
-                                      };
-
-                        if (objects.Count() > 0)
-                            return Ok(objects);
-                        else
-                            return NotFound("any objects doesnt exist");
-                    }
-                }
-
-                else
-                {
-                    if (model.StartPrice > 0 && model.LastPrice <= 0)
-                    {
-                        var objects = from m in currencyShopDb.Objects
-                                      where m.CategoryId == model.CategoryId
-                                      where m.Price >= model.StartPrice
-                                      select new RObjects()
-                                      {
-                                          Id = m.Id,
-                                          BrandName = m.BrandName,
-                                          Name = m.Name,
-                                          Price = m.Price,
-                                          ProduceYear = m.ProduceYear,
-                                          DatePosted = m.DatePosted,
-
-                                      };
-
-                        if (objects.Count() > 0)
-                            return Ok(objects);
-                        else
-                            return NotFound("any objects doesnt exist");
-                    }
-
-                    else if (model.StartPrice <= 0 && model.LastPrice > 0)
-                    {
-                        var objects = from m in currencyShopDb.Objects
-                                      where m.CategoryId == model.CategoryId
-                                      where m.Price <= model.LastPrice
-                                      select new RObjects()
-                                      {
-                                          Id = m.Id,
-                                          BrandName = m.BrandName,
-                                          Name = m.Name,
-                                          Price = m.Price,
-                                          ProduceYear = m.ProduceYear,
-                                          DatePosted = m.DatePosted,
-
-                                      };
-
-                        if (objects.Count() > 0)
-                            return Ok(objects);
-                        else
-                            return NotFound("any objects doesnt exist");
-                    }
-                    else
-                    {
-                        var objects = from m in currencyShopDb.Objects
-                                      where m.CategoryId == model.CategoryId
-                                      where m.Price >= model.StartPrice && m.Price <= model.LastPrice
-                                      select new RObjects()
-                                      {
-                                          Id = m.Id,
-                                          BrandName = m.BrandName,
-                                          Name = m.Name,
-                                          Price = m.Price,
-                                          ProduceYear = m.ProduceYear,
-                                          DatePosted = m.DatePosted,
-
-                                      };
-
-                        if (objects.Count() > 0)
-                            return Ok(objects);
-                        else
-                            return NotFound("any objects doesnt exist");
-                    }
-                }
-
-            }
-
-
-        }
+      
+       
         /// <response code="200">get object successfully</response>
         [HttpGet("{search}")]
         [MapToApiVersion("1")]

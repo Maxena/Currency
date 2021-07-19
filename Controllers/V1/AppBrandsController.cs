@@ -14,7 +14,7 @@ namespace CurrencyShop.Controllers
 {
     [Produces("application/json")]
     [ApiVersion("1.0")]
-    [Route("api/app/v{version:apiVersion}/barnd/[action]")]
+    [Route("api/app/v{version:apiVersion}/barnd")]
     [ApiController]
     public class AppBrandsController : ControllerBase
     {

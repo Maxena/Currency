@@ -48,10 +48,10 @@ namespace CurrencyShop.Controllers
         /// <response code="400">image does not uploded</response>
         /// <response code="201">Ads change successfull </response>
         // PUT api/<AdsController>/5
-        [HttpPut]
+        [HttpPatch]
         [MapToApiVersion("1.0")]
         [Authorize]
-        public IActionResult put([FromBody]AdsModel ads)
+        public IActionResult patch([FromBody]AdsModel ads)
         {
           
             var stream = new MemoryStream(ads.imageArray);

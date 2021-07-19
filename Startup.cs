@@ -93,9 +93,22 @@ namespace CurrencyShop
                     Name = "Authorization",
                     Type = SecuritySchemeType.ApiKey
                 });
-                c.OperationFilter<SecurityRequirementsOperationFilter>();
-               
-                    });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "bearer"
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
+
+            });
 
                
                     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
