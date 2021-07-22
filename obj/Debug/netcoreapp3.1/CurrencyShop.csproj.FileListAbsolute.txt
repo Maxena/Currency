@@ -100,3 +100,15 @@ F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp
 F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Ninject.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\ExcelDataReader.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\EPPlus.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\ExcelDataReader.DataSet.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\Microsoft.IO.RecyclableMemoryStream.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+F:\currencyShop\CurrencyShop\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll

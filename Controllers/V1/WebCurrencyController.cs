@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -51,9 +52,57 @@ namespace CurrencyShop.Controllers
             return Ok("added data successfuly!");
 
         }
-
-        /// <response code="200">added data successfuly!</response>
         [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Upload(IFormFile postedFile)
+        {
+            if (postedFile == null || postedFile.Length == 0)
+            {
+                return RedirectToAction("ImportExcel");
+            }
+
+            //Get file
+            var newfile = new FileInfo(postedFile.FileName);
+            var fileExtension = newfile.Extension;
+
+            //Check if file is an Excel File
+            if (fileExtension.Contains(".xls"))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await postedFile.CopyToAsync(ms);
+
+                    using (ExcelPackage package = new ExcelPackage(ms))
+                    {
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                        int totalRows = workSheet.Dimension.Rows;
+
+                        List<Currency> customerList = new List<Currency>();
+
+                        for (int i = 2; i <= totalRows; i++)
+                        {
+                            customerList.Add(new Currency
+                            {
+                              
+                                Name = workSheet.Cells[i, 2].Value.ToString(),
+                                LastPrice = Convert.ToInt16(workSheet.Cells[i, 3].Value),
+                                LastUpdated = Convert.ToDateTime(workSheet.Cells[i, 4].Value),
+                                ImgInternetUrl = workSheet.Cells[i, 6].Value.ToString(),
+                                Type = Convert.ToInt16(workSheet.Cells[i, 7].Value),
+                               
+                            });
+                        }
+
+                        currencyShopDb.Currency.AddRange(customerList);
+                        await currencyShopDb.SaveChangesAsync();
+                    }
+                }
+
+            }
+            return Ok("set data ok");
+        }
+            /// <response code="200">added data successfuly!</response>
+            [HttpPost]
         [MapToApiVersion("1")]
 
         [Authorize]

@@ -53,6 +53,7 @@ F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Mono.Cecil.Pdb
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Mono.Cecil.Rocks.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Mono.Cecil.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Newtonsoft.Json.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Ninject.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Paket.Core.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Scrutor.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Swashbuckle.AspNetCore.Annotations.dll
