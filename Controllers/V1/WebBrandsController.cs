@@ -5,6 +5,7 @@ using CurrencyShop.requestModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,55 @@ namespace CurrencyShop.Controllers
         public WebBrandsController(CurrencyShopDb db)
         {
             this.currencyShopDb = db;
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Upload(IFormFile postedFile)
+        {
+            if (postedFile == null || postedFile.Length == 0)
+            {
+                return RedirectToAction("ImportExcel");
+            }
+
+            //Get file
+            var newfile = new FileInfo(postedFile.FileName);
+            var fileExtension = newfile.Extension;
+
+            //Check if file is an Excel File
+            if (fileExtension.Contains(".xls"))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await postedFile.CopyToAsync(ms);
+
+                    using (ExcelPackage package = new ExcelPackage(ms))
+                    {
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                        int totalRows = workSheet.Dimension.Rows;
+
+                        List<Brand> customerList = new List<Brand>();
+
+                        for (int i = 2; i <= totalRows; i++)
+                        {
+                            customerList.Add(new Brand
+                            {
+
+                                categoryId = Convert.ToInt16(workSheet.Cells[i, 2].Value),
+                                Name = (workSheet.Cells[i, 3].Value).ToString(),
+                                ImgInternetUrl = workSheet.Cells[i, 5].Value.ToString(),
+                     
+
+                            });
+                        }
+
+                        currencyShopDb.Brands.AddRange(customerList);
+                        await currencyShopDb.SaveChangesAsync();
+                    }
+                }
+
+            }
+            return Ok("set data ok");
         }
         /// <response code="200">Get brands successfull</response>
         /// <response code="404">There is no brand</response>

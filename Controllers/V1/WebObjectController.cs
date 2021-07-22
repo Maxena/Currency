@@ -4,8 +4,10 @@ using CurrencyShop.requestModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +26,60 @@ namespace CurrencyShop.Controllers
         {
             this.currencyShopDb = db;
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> Upload(IFormFile postedFile)
+        {
+            if (postedFile == null || postedFile.Length == 0)
+            {
+                return RedirectToAction("ImportExcel");
+            }
+
+            //Get file
+            var newfile = new FileInfo(postedFile.FileName);
+            var fileExtension = newfile.Extension;
+
+            //Check if file is an Excel File
+            if (fileExtension.Contains(".xls"))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await postedFile.CopyToAsync(ms);
+
+                    using (ExcelPackage package = new ExcelPackage(ms))
+                    {
+                        ExcelWorksheet workSheet = package.Workbook.Worksheets["Sheet1"];
+                        int totalRows = workSheet.Dimension.Rows;
+
+                        List<Objects> customerList = new List<Objects>();
+
+                        for (int i = 2; i <= totalRows; i++)
+                        {
+                            customerList.Add(new Objects
+                            {
+
+                                Name = workSheet.Cells[i, 2].Value.ToString(),
+                                ProduceYear = Convert.ToInt16(workSheet.Cells[i, 3].Value),
+                                Price = Convert.ToInt16(workSheet.Cells[i, 4].Value),
+                                DatePosted = Convert.ToDateTime(workSheet.Cells[i, 5].Value),
+                                CategoryId= Convert.ToUInt16(workSheet.Cells[i, 6].Value),
+                                BrandName = workSheet.Cells[i, 6].Value.ToString(),
+                              
+
+                            });
+                        }
+
+                        currencyShopDb.Objects.AddRange(customerList);
+                        await currencyShopDb.SaveChangesAsync();
+                    }
+                }
+
+            }
+            return Ok("set data ok");
+        }
+
+
         /// <response code="200""send list successfully"</response>
         [HttpPost]
         [ActionName("")]
