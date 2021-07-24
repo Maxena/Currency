@@ -13,6 +13,9 @@ F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Authentication
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\ImageUploader.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\AspNetCoreRateLimit.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Chessie.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\EPPlus.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\ExcelDataReader.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\ExcelDataReader.DataSet.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\FSharp.Core.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Net.Http.Formatting.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Web.Http.dll
@@ -32,9 +35,14 @@ F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Exte
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.Abstractions.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.Binder.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.FileExtensions.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Configuration.Json.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.DependencyInjection.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.DependencyModel.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.FileProviders.Abstractions.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.FileProviders.Physical.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.FileSystemGlobbing.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Logging.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Logging.Abstractions.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Options.dll
@@ -45,6 +53,7 @@ F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Iden
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IO.RecyclableMemoryStream.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.OpenApi.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Web.Infrastructure.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
@@ -71,7 +80,9 @@ F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Identit
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Net.Http.WinHttpHandler.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Runtime.Caching.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Text.Encoding.CodePages.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Text.Json.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\System.Xml.XPath.XmlDocument.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\WebActivatorEx.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\unix\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netcoreapp2.1\Microsoft.Data.SqlClient.dll
@@ -85,5 +96,6 @@ F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\l
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\CurrencyShop.xml
 F:\currencyShop\CurrencyShop\obj\Release\netcoreapp3.1\PubTmp\Out\CurrencyShop.deps.json

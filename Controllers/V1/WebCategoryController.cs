@@ -1,6 +1,7 @@
 ﻿using CurrencyShop.Data;
 using CurrencyShop.Helper;
 using CurrencyShop.Models;
+using CurrencyShop.recievedModel;
 using CurrencyShop.requestModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -77,6 +78,25 @@ namespace CurrencyShop.Controllers
             else { return NotFound("There is no brand"); }
 
         }
+
+        [HttpGet("type")]
+       
+        [MapToApiVersion("1")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Category>))]
+        public IActionResult Type()
+        {
+            var entity = from c in currencyShopDb.Categories select new RType() { Id = c.Id, Type = c.Type };
+            if (entity.Count() > 0)
+            {
+                return Ok(entity);
+            }
+            else
+            {
+                return NotFound("There is no data");
+            }
+        }
+
+
         [HttpGet]
         [MapToApiVersion("1")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Category>))]

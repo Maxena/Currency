@@ -142,8 +142,10 @@ namespace CurrencyShop
 
             app.UseHttpsRedirection();
             app.UseIpRateLimiting();
+            
+ 
 
-            app.UseCors("MyPolicy");
+          
             app.UseStaticFiles();
             app.UseSwagger(c =>
             {
@@ -153,11 +155,14 @@ namespace CurrencyShop
 
             if (env.IsDevelopment())
 
-            { app.UseDeveloperExceptionPage(); }
+            { app.UseDeveloperExceptionPage();  }
 
-             
 
-         
+            app.UseCors("MyPolicy").UseAuthentication();
+            app.UseCors("MyPolicy").UseCors() ;
+            app.UseCors("MyPolicy");
+            app.UseCors("MyPolicy").UseSwagger();
+
 
             app.UseEndpoints(endpoints =>
             {

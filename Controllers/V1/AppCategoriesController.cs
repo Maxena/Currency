@@ -1,6 +1,7 @@
 ﻿using CurrencyShop.Data;
 using CurrencyShop.Helper;
 using CurrencyShop.Models;
+using CurrencyShop.recievedModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,23 @@ namespace CurrencyShop.Controllers
         {
             this.currencyShopDb = db;
         }
+        [HttpGet("type")]
+
+        [MapToApiVersion("1")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<Category>))]
+        public IActionResult Type()
+        {
+            var entity = from c in currencyShopDb.Categories select new RType() { Id = c.Id, Type = c.Type };
+            if (entity.Count() > 0)
+            {
+                return Ok(entity);
+            }
+            else
+            {
+                return NotFound("There is no data");
+            }
+        }
+
         /// <response code="200">Get category successfull</response>
         /// <response code="404">There is no category</response>
         // GET: api/<ValuesController>
