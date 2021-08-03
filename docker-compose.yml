@@ -1,0 +1,32 @@
+version: '3.4'
+
+
+networks:
+  localdev:
+      name: localdev
+
+services:
+  ms-sql-server:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: db-server
+    networks:
+        - localdev
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Bigpassw0rd@example.com"
+      MSSQL_PID: Express
+    ports:
+      - "1413:1433"
+  api:
+    build: .
+    restart: always
+    ports: 
+      - "8090:80"
+    depends_on:
+      - ms-sql-server
+    environment:
+        ASPNETCORE_ENVIRONMENT: "Development"
+    networks:
+        - localdev
+    volumes:
+        - ./tmp:/app/tmp

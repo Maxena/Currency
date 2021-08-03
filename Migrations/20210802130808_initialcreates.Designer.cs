@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CurrencyShop.Migrations
 {
     [DbContext(typeof(CurrencyShopDb))]
-    [Migration("20210715101428_initialCreate")]
-    partial class initialCreate
+    [Migration("20210802130808_initialcreates")]
+    partial class initialcreates
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

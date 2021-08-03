@@ -41,7 +41,17 @@ namespace CurrencyShop
         {
 
             services.AddControllers();
-            services.AddDbContext<CurrencyShopDb>(options => options.UseSqlServer(Configuration.GetConnectionString("CurrencyDbConnectionString")));
+
+
+            //var server = Configuration["DbServer"] ?? "localhost";
+            //var port = Configuration["DbPort"] ?? "1413"; // Default SQL Server port
+            //var user = Configuration["DbUser"] ?? "SA"; // Warning do not use the SA account
+            //var password = Configuration["Password"] ?? "Bigpassw0rd@example.com";
+            //var database = Configuration["Database"] ?? "currencydb";
+            //var connectionstring =
+            //    $"Server={server}, {port};Initial Catalog={database};User ID={user};Password={password}";
+            // Add Db context as a service to our application
+            services.AddDbContext<CurrencyShopDb>(options => options.UseSqlServer(Configuration.GetConnectionString("sqlserver")));
 
             services.AddApiVersioning(options =>
             {
@@ -136,6 +146,8 @@ namespace CurrencyShop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //DatabaseManagementService.MigrationInitialisation(app);
+
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

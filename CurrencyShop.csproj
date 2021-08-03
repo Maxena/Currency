@@ -38,6 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
     <Folder Include="wwwroot\brand\" />
     <Folder Include="wwwroot\AdsImage\" />
     <Folder Include="wwwroot\category\" />

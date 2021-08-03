@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CurrencyShop.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class initialcreates : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
