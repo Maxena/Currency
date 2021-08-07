@@ -1,20 +1,19 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS base
+#build phase
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 as build
+
+WORKDIR /app
+
+COPY *csproj .
+RUN dotnet restore
+
+COPY . .
+RUN dotnet publish -c Release -o pub
+
+#Run phase
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
+COPY --from=build /app/pub .
 
-FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
-WORKDIR /src
-COPY ["CurrencyShop.csproj", "."]
-RUN dotnet restore "./CurrencyShop.csproj"
-COPY . .
-RUN dotnet build "CurrencyShop.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "CurrencyShop.csproj" -c Release -o /app/publish
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "CurrencyShop.dll"]
-
+ENTRYPOINT [ "dotnet","CurrencyShop.dll" ]

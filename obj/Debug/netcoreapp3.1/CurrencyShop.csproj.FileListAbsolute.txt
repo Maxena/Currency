@@ -225,3 +225,4 @@ C:\Users\Maxena\Currency\obj\Debug\netcoreapp3.1\CurrencyShop.dll
 C:\Users\Maxena\Currency\obj\Debug\netcoreapp3.1\CurrencyShop.xml
 C:\Users\Maxena\Currency\obj\Debug\netcoreapp3.1\CurrencyShop.pdb
 C:\Users\Maxena\Currency\obj\Debug\netcoreapp3.1\CurrencyShop.genruntimeconfig.cache
+C:\Users\Maxena\Currency\obj\Debug\netcoreapp3.1\CurrencyShop.csproj.AssemblyReference.cache

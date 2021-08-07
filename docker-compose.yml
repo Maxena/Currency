@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 
 
 networks:
@@ -8,24 +8,26 @@ networks:
 services:
   ms-sql-server:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: db-server
+    environment:
+          ACCEPT_EULA: "Y"
+          SA_PASSWORD: "Bigpassw0rd@example.com"
+          MSSQL_PID: Express
+    container_name: ms-sql-server
     networks:
         - localdev
-    environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "Bigpassw0rd@example.com"
-      MSSQL_PID: Express
     ports:
-      - "1413:1433"
+      - "1433:1433"
   api:
     build: .
-    restart: always
-    ports: 
-      - "8090:80"
     depends_on:
       - ms-sql-server
     environment:
-        ASPNETCORE_ENVIRONMENT: "Development"
+        ServerName: "ms-sql-server"
+        Database: "currenncydb"
+        UserName: "SA"
+        Password: "Bigpassw0rd@example.com"
+    ports:
+      - "8090:80"
     networks:
         - localdev
     volumes:

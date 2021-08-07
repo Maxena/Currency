@@ -1,4 +1,4 @@
-    using AspNetCoreRateLimit;
+using AspNetCoreRateLimit;
 using CurrencyShop.Data;
 using CurrencyShop.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -43,26 +43,27 @@ namespace CurrencyShop
             services.AddControllers();
 
 
-            var server = Configuration["DbServer"] ?? "ms-sql-server";
-            var port = Configuration["DbPort"] ?? "1413"; // Default SQL Server port
-            var user = Configuration["DbUser"] ?? "SA"; // Warning do not use the SA account
-            var password = Configuration["Password"] ?? "Bigpassw0rd@example.com";
-            var database = Configuration["Database"] ?? "currencydb";
-            var connectionstring =
-                $"Server ={server}; Database ={database}; User Id = {user}; Password = {password}";
+            services.AddDbContext<CurrencyShopDb>(options =>
+           {
+               var server = Configuration["ServerName"];
+               var port = "1433";
+               var database = Configuration["Database"];
+               var user = Configuration["UserName"];
+               var password = Configuration["Password"];
 
-            // Add Db context as a service to our application
-            services.AddDbContext<CurrencyShopDb>(options => options.UseSqlServer(connectionstring));
+               options.UseSqlServer(
+                   $"Server={server},{port};Initial Catalog={database};User ID={user};Password={password}");
+           });
 
             services.AddApiVersioning(options =>
             {
-                options.DefaultApiVersion = new ApiVersion(1,0);
+                options.DefaultApiVersion = new ApiVersion(1, 0);
                 options.AssumeDefaultVersionWhenUnspecified = true;
-                
+
                 // reporting api versions will return the headers "api-supported-versions" and "api-deprecated-versions"
                 options.ReportApiVersions = false;
             });
-          
+
             services.AddVersionedApiExplorer(options =>
             {
 
@@ -88,7 +89,7 @@ namespace CurrencyShop
             services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
             services.AddSwaggerGen(c =>
             {
-             
+
 
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CurrencyShop", Version = "v1" });
                 // Set the comments path for the Swagger JSON and UI.
@@ -96,8 +97,8 @@ namespace CurrencyShop
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
                 c.DescribeAllParametersInCamelCase();
-                
-                    c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
+
+                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
                     Description = "Please insert JWT with Bearer into field",
@@ -121,22 +122,22 @@ namespace CurrencyShop
 
             });
 
-               
-                    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuer = true,
-                       ValidateAudience = true,
-                       ValidateLifetime = true,
-                       ValidateIssuerSigningKey = true,
-                       ValidIssuer = Configuration["Tokens:Issuer"],
-                       ValidAudience = Configuration["Tokens:Issuer"],
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
-                       ClockSkew = TimeSpan.Zero,
-                   };
-               });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+       .AddJwtBearer(options =>
+       {
+           options.TokenValidationParameters = new TokenValidationParameters
+           {
+               ValidateIssuer = true,
+               ValidateAudience = true,
+               ValidateLifetime = true,
+               ValidateIssuerSigningKey = true,
+               ValidIssuer = Configuration["Tokens:Issuer"],
+               ValidAudience = Configuration["Tokens:Issuer"],
+               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Tokens:Key"])),
+               ClockSkew = TimeSpan.Zero,
+           };
+       });
             services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
 
             services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
@@ -155,10 +156,10 @@ namespace CurrencyShop
 
             app.UseHttpsRedirection();
             app.UseIpRateLimiting();
-            
- 
 
-          
+
+
+
             app.UseStaticFiles();
             app.UseSwagger(c =>
             {
@@ -168,18 +169,18 @@ namespace CurrencyShop
 
             if (env.IsDevelopment())
 
-            { app.UseDeveloperExceptionPage();  }
+            { app.UseDeveloperExceptionPage(); }
 
 
             app.UseCors("MyPolicy").UseAuthentication();
-            app.UseCors("MyPolicy").UseCors() ;
+            app.UseCors("MyPolicy").UseCors();
             app.UseCors("MyPolicy");
             app.UseCors("MyPolicy").UseSwagger();
 
 
             app.UseEndpoints(endpoints =>
             {
-               
+
                 endpoints.MapControllers();
             });
         }
