@@ -23,7 +23,7 @@ services:
       - ms-sql-server
     environment:
         ServerName: "ms-sql-server"
-        Database: "currenncydb"
+        Database: "currencydb"
         UserName: "SA"
         Password: "Bigpassw0rd@example.com"
     ports:
